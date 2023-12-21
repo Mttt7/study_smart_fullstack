@@ -1,5 +1,6 @@
 package com.mt.studysmart.studysmart.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,8 +39,10 @@ public class FlashcardDeck {
 
     @ManyToOne
     @JoinColumn(name = "user_profile_id")
+    @JsonIgnore
     private UserProfile userProfile;
 
     @OneToOne(mappedBy = "flashcardDeck", cascade = CascadeType.ALL)
+    @JsonIgnore
     private CurrentSubdeck currentSubdeck;
 }

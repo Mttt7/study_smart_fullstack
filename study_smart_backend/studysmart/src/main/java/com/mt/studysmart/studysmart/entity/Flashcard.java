@@ -1,6 +1,9 @@
 package com.mt.studysmart.studysmart.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
+import lombok.Cleanup;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,11 +38,31 @@ public class Flashcard {
 
     @ManyToOne
     @JoinColumn(name = "deck_id")
+    @JsonIgnore
     private FlashcardDeck flashcardDeck;
+
 
     @ManyToOne
     @JoinColumn(name = "subdeck_id")
     private CurrentSubdeck currentSubdeck;
 
+    @Column(name = "previous_score")
+    private int previousScore;
 
+    @Column(name = "score")
+    private int score;
+
+    @Override
+    public String toString() {
+        return "Flashcard{" +
+                "id=" + id +
+                ", frontContent='" + frontContent + '\'' +
+                ", backContent='" + backContent + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
+                ", flashcardDeck=" + flashcardDeck +
+                ", currentSubdeck=" + currentSubdeck +
+                ", score=" + score +
+                '}';
+    }
 }

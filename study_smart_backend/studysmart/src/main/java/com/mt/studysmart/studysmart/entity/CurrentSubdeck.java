@@ -1,6 +1,7 @@
 package com.mt.studysmart.studysmart.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,6 @@ public class CurrentSubdeck {
 
     @OneToOne
     @JoinColumn(name = "deck_id", referencedColumnName = "id")
+    @JsonIgnore //??????????????????????? zmienic moze
     private FlashcardDeck flashcardDeck;
 }
