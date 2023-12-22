@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: .5rem;
+
+    height: 160px;
+    padding: 2rem;
+    background-color: rgb(240, 240, 240);
+
+    .text {
+        font-size: 1.2rem;
+        font-style: bold;
+    }
+
+    .buttons {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+        gap: .4rem;
+
+        * {
+            padding: .6rem;
+            border-radius: 10px;
+        }
+
+        *:hover {
+            cursor: pointer;
+
+        }
+
+        .cancel {
+            color: white;
+            background-color: rgb(93, 93, 93);
+        }
+
+        .cancel:hover {
+            background-color: rgb(67, 65, 65);
+        }
+
+        .yes {
+            color: white;
+            background-color: rgb(210, 47, 47);
+        }
+
+        .yes:hover {
+            background-color: rgb(157, 28, 28);
+        }
+    }
+}

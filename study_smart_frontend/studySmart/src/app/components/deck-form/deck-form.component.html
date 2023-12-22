@@ -1,0 +1,15 @@
+<div class="main-content" style="padding-left: 5rem; padding-right: 5rem;padding-top: 2rem;">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" required>
+
+
+        <label for="dayLimit">Day Goal:</label>
+        <input type="number" id="dayLimit" formControlName="dayLimit" required>
+
+
+        <button type="submit">Add</button>
+    </form>
+    `
+
+</div>

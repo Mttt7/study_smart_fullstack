@@ -1,0 +1,33 @@
+<div class="main-content" style="padding-left: 5rem; padding-right: 5rem;padding-top: 2rem;">
+    <table class="table  table-border table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Flashcards</th>
+                <th>Learnt %</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let deck of decks">
+
+                <td class="align-middle">{{deck.name}}</td>
+                <td class="align-middle">69</td>
+                <td class="align-middle">69%</td>
+                <td class="align-middle">{{deck.dateCreated | date:"dd-MM-yyy"}}</td>
+                <td>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" (click)="renameDeck()">Rename</a></li>
+                        <li><a class="dropdown-item" (click)="deleteDeck(deck)">Delete</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="text">Delete all cards in deck? This can not be undone.</div>
+    <input type="text" #name>
+    <div class="buttons">
+        <div class="cancel" (click)="closeDialog('cancel')">Cancel</div>
+        <div class="yes" (click)="closeDialog(name.value)">Change</div>
+    </div>
+</div>
