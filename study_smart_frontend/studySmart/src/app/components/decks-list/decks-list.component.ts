@@ -28,7 +28,6 @@ export class DecksListComponent {
     this.flashcardDeckService.getDeckListByUserId(1).subscribe(
       (data) => {
         this.decks = data as FlashcardDeck[];
-        console.log(this.decks);
       }
     )
   }
@@ -53,11 +52,21 @@ export class DecksListComponent {
       }
     )
   }
-  renameDeck() {
+  renameDeck(deck: FlashcardDeck) {
     this.dialogService.openChangeNameDialog().subscribe(
       result => {
         if (result != 'cancel') {
-          this.flashcardDeckService.changeDeckName(1, result).subscribe(() => {
+          let allowedCharsRegex = /^[a-zA-Z0-9\-]+$/;
+          if (result.trim() == '' || !allowedCharsRegex.test(result)) {
+            let snackBarRef = this._snackBar.open(`Bad New Name!`, 'Ok', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            })
+            return
+          }
+
+          this.flashcardDeckService.changeDeckName(deck.id, result).subscribe(() => {
             let snackBarRef = this._snackBar.open(`Name Changed to: ${result}`, 'Ok', {
               duration: 3000,
               horizontalPosition: 'center',

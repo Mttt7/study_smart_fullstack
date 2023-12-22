@@ -37,11 +37,7 @@ export class DeckFormComponent {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     })
-    this.flashcardDeckService.createDeck(this.name?.value, this.dayLimit?.value).subscribe(
-      data => {
-        console.log(data)
-      }
-    )
+    this.flashcardDeckService.createDeck(this.name?.value, this.dayLimit?.value).subscribe()
   }
 
 

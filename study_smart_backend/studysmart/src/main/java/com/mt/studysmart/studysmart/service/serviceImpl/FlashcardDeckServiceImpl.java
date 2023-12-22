@@ -86,7 +86,9 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
 
     @Override
     public FlashcardDeck ChangeFlashcardDeckName(Long deckId, NewNameDto name) {
+        System.out.println(deckId);
         FlashcardDeck flashcardDeck = this.findById(deckId);
+        System.out.println(flashcardDeck);
         flashcardDeck.setName(name.getName());
         return flashcardDeckRepository.save(flashcardDeck);
     }
