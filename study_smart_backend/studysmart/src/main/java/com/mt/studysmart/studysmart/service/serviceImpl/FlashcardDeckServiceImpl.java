@@ -3,6 +3,7 @@ package com.mt.studysmart.studysmart.service.serviceImpl;
 import com.mt.studysmart.studysmart.dao.FlashcardDeckRepository;
 import com.mt.studysmart.studysmart.dao.FlashcardRepository;
 import com.mt.studysmart.studysmart.dto.FlashcardDeckCreateDto;
+import com.mt.studysmart.studysmart.dto.NewNameDto;
 import com.mt.studysmart.studysmart.entity.Flashcard;
 import com.mt.studysmart.studysmart.entity.FlashcardDeck;
 import com.mt.studysmart.studysmart.entity.UserProfile;
@@ -25,6 +26,11 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
     private final FlashcardDeckRepository flashcardDeckRepository;
     private final UserProfileService userProfileService;
 
+
+    @Override
+    public void save(FlashcardDeck flashcardDeck) {
+        flashcardDeckRepository.save(flashcardDeck);
+    }
 
     @Override
     public FlashcardDeck findById(Long id) {
@@ -65,5 +71,23 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         flashcardDeckRepository.save(flashcardDeck);
 
         return flashcardDeck;
+    }
+
+    @Override
+    public void deleteFlashcardDeck(Long deckId) {
+        FlashcardDeck flashcardDeck = this.findById(deckId);
+
+        if(flashcardDeck!=null){
+            List<Flashcard> flashcards = this.findFlashcardsByDeckId(deckId);
+            flashcardRepository.deleteAll(flashcards);
+            this.flashcardDeckRepository.delete(flashcardDeck);
+        }
+    }
+
+    @Override
+    public FlashcardDeck ChangeFlashcardDeckName(Long deckId, NewNameDto name) {
+        FlashcardDeck flashcardDeck = this.findById(deckId);
+        flashcardDeck.setName(name.getName());
+        return flashcardDeckRepository.save(flashcardDeck);
     }
 }

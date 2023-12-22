@@ -50,7 +50,7 @@ public class FlashcardServiceImpl implements FlashcardService {
         if(dbFlashcard == null){
             throw new RuntimeException("Flashcard not found");
         }
-        
+
         dbFlashcard.setFrontContent(flashcardUpdateDto.getFrontContent());
         dbFlashcard.setBackContent(flashcardUpdateDto.getBackContent());
 

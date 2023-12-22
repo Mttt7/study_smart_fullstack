@@ -1,7 +1,6 @@
 package com.mt.studysmart.studysmart.service.serviceImpl;
 
 import com.mt.studysmart.studysmart.dao.FlashcardDeckRepository;
-import com.mt.studysmart.studysmart.dao.FlashcardRepository;
 import com.mt.studysmart.studysmart.dao.UserProfileRepository;
 import com.mt.studysmart.studysmart.entity.FlashcardDeck;
 import com.mt.studysmart.studysmart.entity.UserProfile;
@@ -20,7 +19,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public List<FlashcardDeck> getDecksByUserId(Long id) {
-        return flashcardDeckRepository.findAllByUserProfile_Id(id);
+        return flashcardDeckRepository.findAllByUserProfile_IdOrderByLastUpdatedDesc(id);
     }
 
     @Override

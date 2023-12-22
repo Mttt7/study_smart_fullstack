@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FlashcardDeckRepository extends JpaRepository<FlashcardDeck,Long> {
-    List<FlashcardDeck> findAllByUserProfile_Id(Long id);
+    List<FlashcardDeck> findAllByUserProfile_IdOrderByLastUpdatedDesc(Long id);
 
 
 
