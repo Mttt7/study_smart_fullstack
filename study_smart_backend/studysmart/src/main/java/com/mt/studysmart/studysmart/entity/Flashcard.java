@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Cleanup;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -51,6 +52,9 @@ public class Flashcard {
 
     @Column(name = "score")
     private int score;
+
+    @Column(name = "status")
+    private int status=-1;
 
     @Override
     public String toString() {

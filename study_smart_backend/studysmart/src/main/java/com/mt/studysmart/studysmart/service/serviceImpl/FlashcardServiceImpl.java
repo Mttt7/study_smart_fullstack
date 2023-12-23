@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Lazy))
@@ -71,8 +70,12 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public List<Flashcard> findFlashcardsWithLowestScore(int limit) { ///wywalic
-        Query query = entityManager.createQuery("SELECT f FROM Flashcard f ORDER BY f.score ASC");
+    public List<Flashcard> populateSubdeck(int limit, Long deckId) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT * FROM flashcard WHERE deck_id = ?1 AND status = ?2", Flashcard.class
+        );
+        query.setParameter(1, deckId);
+        query.setParameter(2, -1);
         query.setMaxResults(limit);
         return query.getResultList();
     }
@@ -109,12 +112,14 @@ public class FlashcardServiceImpl implements FlashcardService {
 
     private void updateSubdeck(Flashcard flashcard) {
         CurrentSubdeck currentSubdeck = flashcard.getCurrentSubdeck();
+        flashcard.setStatus(1);
         flashcard.setCurrentSubdeck(null);
+
         this.currentSubdeckService.addNewFlashcardToSubdeck(currentSubdeck);
     }
 
     public Flashcard findPristineFlashcard(){
-        Flashcard newFlashcard = this.flashcardRepository.findFirstFlashcardByScoreAndPreviousScoreAndCurrentSubdeckIsNull(0,0);
+        Flashcard newFlashcard = this.flashcardRepository.findFirstFlashcardByStatus(-1);
         return newFlashcard;
     }
 

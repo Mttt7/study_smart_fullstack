@@ -14,7 +14,7 @@ public interface FlashcardService {
 
     List<Flashcard> findBySubdeckId(Long id);
 
-    List<Flashcard> findFlashcardsWithLowestScore(int limit);
+    List<Flashcard> populateSubdeck(int limit, Long deckId);
     void removeById(Long id);
 
    Long countByFlashcardDeckId(Long id);

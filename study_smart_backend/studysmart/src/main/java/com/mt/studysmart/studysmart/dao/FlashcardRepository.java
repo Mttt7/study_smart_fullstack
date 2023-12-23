@@ -2,8 +2,6 @@ package com.mt.studysmart.studysmart.dao;
 
 import com.mt.studysmart.studysmart.entity.Flashcard;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -20,6 +18,6 @@ public interface FlashcardRepository extends JpaRepository<Flashcard,Long> {
 
     Long countByFlashcardDeckId(Long deckId);
 
-    Flashcard findFirstFlashcardByScoreAndPreviousScoreAndCurrentSubdeckIsNull(int score, int previousScore);
+    Flashcard findFirstFlashcardByStatus(int status);
 
 }
