@@ -2,11 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FlashcardDeck } from '../models/FlashcardDeck';
 import { Observable } from 'rxjs';
+import { Flashcard } from '../models/Flashcard';
+import { FlashcardsPaginatedResponse } from '../models/FlashcardsPaginatedResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlashcardDeckService {
+
 
 
   private decksUrl = 'http://localhost:5000/api/decks';
@@ -37,6 +40,10 @@ export class FlashcardDeckService {
     return this.httpClient.delete(`${this.decksUrl}/${id}`)
   }
 
+  getFlashcardsByDeckIdPaginate(deckId: number, pageNumber: number, pageSize: number): Observable<FlashcardsPaginatedResponse> {
+    return this.httpClient.get<FlashcardsPaginatedResponse>(`${this.decksUrl}/${deckId}/flashcards/paginated?page=${pageNumber}&size=${pageSize}`)
+  }
+
 }
 
 interface CreateDeckPayload {
@@ -44,3 +51,5 @@ interface CreateDeckPayload {
   name: String;
   dayLimit: number;
 }
+
+

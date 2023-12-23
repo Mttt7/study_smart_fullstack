@@ -10,6 +10,8 @@ import com.mt.studysmart.studysmart.entity.UserProfile;
 import com.mt.studysmart.studysmart.service.FlashcardDeckService;
 import com.mt.studysmart.studysmart.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -53,6 +55,11 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
     }
 
     @Override
+    public Page<Flashcard> findFlashcardsByDeckIdWithPagination(Long deckId, Pageable pageable) {
+        return flashcardRepository.findAllByFlashcardDeck_Id(deckId, pageable);
+    }
+
+    @Override
     public Flashcard addFlashcardToDeck(Long id, Flashcard flashcard) {
         FlashcardDeck tempFlashcardDeck = this.findById(id);
         flashcard.setFlashcardDeck(tempFlashcardDeck);
@@ -90,4 +97,6 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         flashcardDeck.setName(name.getName());
         return flashcardDeckRepository.save(flashcardDeck);
     }
+
+
 }

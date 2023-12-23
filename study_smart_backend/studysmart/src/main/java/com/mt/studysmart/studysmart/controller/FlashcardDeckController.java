@@ -9,6 +9,8 @@ import com.mt.studysmart.studysmart.service.CurrentSubdeckService;
 import com.mt.studysmart.studysmart.service.FlashcardDeckService;
 import com.mt.studysmart.studysmart.service.FlashcardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +34,10 @@ public class FlashcardDeckController {
     @GetMapping("/{deckId}/flashcards")
     List<Flashcard> getFlashcardsByDeckId(@PathVariable Long deckId){
         return this.flashcardDeckService.findFlashcardsByDeckId(deckId);
+    }
+    @GetMapping("/{deckId}/flashcards/paginated")
+    Page<Flashcard> getFlashcardsByDeckIdWithPagination(@PathVariable Long deckId, Pageable pageable){
+        return this.flashcardDeckService.findFlashcardsByDeckIdWithPagination(deckId, pageable);
     }
 
     @PostMapping("/{deckId}/flashcards")

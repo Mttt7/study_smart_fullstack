@@ -1,0 +1,50 @@
+<div style="padding-left: 5rem; padding-right: 5rem;padding-top: 2rem;">
+    <div class="buttons">
+        <button type="button" class="btn btn-primary start-btn">Start</button>
+        <br>
+        <button *ngIf="!showFlashcards" type="button" class="btn btn-primary" (click)="toggleFlashcards()">Show
+            Flashcards</button>
+        <button *ngIf="showFlashcards" type="button" class="btn btn-primary" (click)="toggleFlashcards()">Hide
+            Flashcards</button>
+    </div>
+
+    <div *ngIf="showFlashcards">
+        <table class="table  table-border table-hover flashcard-list">
+            <thead class=" thead-dark">
+                <tr>
+                    <th>Front</th>
+                    <th>Back</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let flashcard of flashcards">
+
+                    <td class="hover" routerLink="">{{flashcard.frontContent | slice:0:30}}</td>
+                    <td class="hover" routerLink="">{{flashcard.backContent | slice:0:30}}</td>
+                    <td class="hover" routerLink="">{{getStatusOfFlashcard(flashcard)}}</td>
+                    <td class="hover" routerLink="">{{flashcard.dateCreated | date: "dd MMM yyyy"}}</td>
+
+
+                    <td>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" (click)="editFlashcard(flashcard)">Rename</a></li>
+                            <li><a class="dropdown-item" (click)="deleteFlashcard(flashcard)">Delete</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page" [showFirstLastButtons]="true" [pageIndex]="currentPage"
+            (page)="handlePageEvent($event)">
+        </mat-paginator>
+    </div>
+</div>

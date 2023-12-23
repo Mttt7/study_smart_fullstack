@@ -4,6 +4,8 @@ import com.mt.studysmart.studysmart.dto.FlashcardDeckCreateDto;
 import com.mt.studysmart.studysmart.dto.NewNameDto;
 import com.mt.studysmart.studysmart.entity.Flashcard;
 import com.mt.studysmart.studysmart.entity.FlashcardDeck;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -23,5 +25,5 @@ public interface FlashcardDeckService {
     FlashcardDeck ChangeFlashcardDeckName(Long deckId, NewNameDto name);
 
 
-
+    Page<Flashcard> findFlashcardsByDeckIdWithPagination(Long deckId, Pageable pageable);
 }

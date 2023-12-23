@@ -9,17 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { DeckFormComponent } from './components/deck-form/deck-form.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
 
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { ChangeNameDialogComponent } from './components/dialogs/change-name-dialog/change-name-dialog.component';
-
-
-
-const routes: Routes = [
-  { path: 'decks', component: DecksListComponent },
-  { path: 'addDeck', component: DeckFormComponent }
-]
+import { DeckDetailsComponent } from './components/deck-details/deck-details.component';
 
 
 @NgModule({
@@ -28,16 +24,17 @@ const routes: Routes = [
     DecksListComponent,
     DeckFormComponent,
     DeleteDialogComponent,
-    ChangeNameDialogComponent
+    ChangeNameDialogComponent,
+    DeckDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
