@@ -54,7 +54,7 @@ public class Flashcard {
     private int score;
 
     @Column(name = "status")
-    private int status=-1;
+    private int status;
 
     @Override
     public String toString() {
