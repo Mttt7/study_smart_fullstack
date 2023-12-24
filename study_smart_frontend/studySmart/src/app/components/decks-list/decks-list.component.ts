@@ -4,6 +4,8 @@ import { FlashcardDeckService } from '../../services/flashcard-deck.service';
 import { DialogService } from '../../services/dialog.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { FlashcardDecksPaginatedResponse } from '../../models/FlashcardDecksPaginatedResponse';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-decks-list',
@@ -12,7 +14,10 @@ import { Router } from '@angular/router';
 })
 export class DecksListComponent {
 
-
+  userId: number = 1;
+  pageSize: number = 5;
+  currentPage: number = 0;
+  length: number = 0
 
   decks: FlashcardDeck[] = [];
 
@@ -21,18 +26,26 @@ export class DecksListComponent {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getFlashcardDeckList();
+    this.getDeckList(this.userId);
   }
 
-  getFlashcardDeckList() {
-    this.flashcardDeckService.getDeckListByUserId(1).subscribe(
-      (data) => {
-        this.decks = data as FlashcardDeck[];
-      }
-    )
+  getDeckList(userId: number) {
+    this.flashcardDeckService.getDeckListByUserIdPaginate(1,
+      this.currentPage,
+      this.pageSize).subscribe(this.proccessResult())
   }
-
-
+  proccessResult() {
+    return (data: FlashcardDecksPaginatedResponse) => {
+      this.decks = data.content as FlashcardDeck[];
+      this.length = data.totalElements;
+      console.log(data)
+    }
+  }
+  handlePageEvent(pageEvent: PageEvent) {
+    this.pageSize = pageEvent.pageSize;
+    this.currentPage = pageEvent.pageIndex;
+    this.getDeckList(this.userId);
+  }
 
   deleteDeck(deck: FlashcardDeck) {
     this.dialogService.openDeleteDialog().subscribe(
@@ -44,7 +57,7 @@ export class DecksListComponent {
               horizontalPosition: 'center',
               verticalPosition: 'top'
             })
-            this.getFlashcardDeckList();
+            this.getDeckList(this.userId);
 
           })
 
@@ -72,7 +85,7 @@ export class DecksListComponent {
               horizontalPosition: 'center',
               verticalPosition: 'top'
             })
-            this.getFlashcardDeckList();
+            this.getDeckList(this.userId);
 
           })
 

@@ -29,10 +29,10 @@ export class DeckDetailsComponent {
 
   ngOnInit(): void {
     this.deckId = Number(this.route.snapshot.params["id"]);
-    this.getDeckList(this.deckId);
+    this.getFlashcardsList(this.deckId);
 
   }
-  getDeckList(id: any) {
+  getFlashcardsList(id: any) {
     this.flashcardDeckService.getFlashcardsByDeckIdPaginate(id,
       this.currentPage,
       this.pageSize).subscribe(this.proccessResult())
@@ -61,7 +61,7 @@ export class DeckDetailsComponent {
   handlePageEvent(pageEvent: PageEvent) {
     this.pageSize = pageEvent.pageSize;
     this.currentPage = pageEvent.pageIndex;
-    this.getDeckList(this.deckId);
+    this.getFlashcardsList(this.deckId);
   }
 
 

@@ -4,6 +4,7 @@ import { FlashcardDeck } from '../models/FlashcardDeck';
 import { Observable } from 'rxjs';
 import { Flashcard } from '../models/Flashcard';
 import { FlashcardsPaginatedResponse } from '../models/FlashcardsPaginatedResponse';
+import { FlashcardDecksPaginatedResponse } from '../models/FlashcardDecksPaginatedResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,12 @@ export class FlashcardDeckService {
     //1 now is hardcoded
     //get userId from userSService
     return this.httpClient.get<FlashcardDeck[]>(`${this.usersUrl}/1/decks`)
+  }
+
+  getDeckListByUserIdPaginate(userId: number, pageNumber: number, pageSize: number): Observable<FlashcardDecksPaginatedResponse> {
+    //1 now is hardcoded
+    //get userId from userSService
+    return this.httpClient.get<FlashcardDecksPaginatedResponse>(`${this.usersUrl}/1/decks/paginated?page=${pageNumber}&size=${pageSize}`)
   }
 
   createDeck(name: String, dayLimit: number): Observable<FlashcardDeck> {

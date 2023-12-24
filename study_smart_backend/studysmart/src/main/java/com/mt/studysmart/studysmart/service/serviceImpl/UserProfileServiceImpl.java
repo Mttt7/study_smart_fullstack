@@ -6,6 +6,8 @@ import com.mt.studysmart.studysmart.entity.FlashcardDeck;
 import com.mt.studysmart.studysmart.entity.UserProfile;
 import com.mt.studysmart.studysmart.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +20,15 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final FlashcardDeckRepository flashcardDeckRepository;
 
     @Override
+    public UserProfile getUserProfileById(Long id) {
+        return userProfileRepository.findById(id).orElse(null);
+    }
+    @Override
     public List<FlashcardDeck> getDecksByUserId(Long id) {
         return flashcardDeckRepository.findAllByUserProfile_IdOrderByLastUpdatedDesc(id);
     }
-
     @Override
-    public UserProfile getUserProfileById(Long id) {
-        return userProfileRepository.findById(id).orElse(null);
+    public Page<FlashcardDeck> getDecksByUserIdWithPagination(Long id, Pageable pageable) {
+        return flashcardDeckRepository.findAllByUserProfile_IdOrderByLastUpdatedDesc(id, pageable);
     }
 }
