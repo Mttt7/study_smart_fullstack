@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ChangeNameDialogComponent } from './components/dialogs/change-name-dialog/change-name-dialog.component';
 import { DeckDetailsComponent } from './components/deck-details/deck-details.component';
+import { AddFlashcardDialogComponent } from './components/dialogs/add-flashcard-dialog/add-flashcard-dialog.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { DeckDetailsComponent } from './components/deck-details/deck-details.com
     DeckFormComponent,
     DeleteDialogComponent,
     ChangeNameDialogComponent,
-    DeckDetailsComponent
+    DeckDetailsComponent,
+    AddFlashcardDialogComponent
   ],
   imports: [
     BrowserModule,

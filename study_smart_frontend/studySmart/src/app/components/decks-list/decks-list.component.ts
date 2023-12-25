@@ -38,7 +38,6 @@ export class DecksListComponent {
     return (data: FlashcardDecksPaginatedResponse) => {
       this.decks = data.content as FlashcardDeck[];
       this.length = data.totalElements;
-      console.log(data)
     }
   }
   handlePageEvent(pageEvent: PageEvent) {

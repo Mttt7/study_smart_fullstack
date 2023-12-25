@@ -5,11 +5,13 @@ import { Observable } from 'rxjs';
 import { Flashcard } from '../models/Flashcard';
 import { FlashcardsPaginatedResponse } from '../models/FlashcardsPaginatedResponse';
 import { FlashcardDecksPaginatedResponse } from '../models/FlashcardDecksPaginatedResponse';
+import { AddFlashcardPayload } from '../models/AddFlashcardPayload';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlashcardDeckService {
+
 
 
 
@@ -49,6 +51,10 @@ export class FlashcardDeckService {
 
   getFlashcardsByDeckIdPaginate(deckId: number, pageNumber: number, pageSize: number): Observable<FlashcardsPaginatedResponse> {
     return this.httpClient.get<FlashcardsPaginatedResponse>(`${this.decksUrl}/${deckId}/flashcards/paginated?page=${pageNumber}&size=${pageSize}`)
+  }
+
+  addFlashcardToDeck(id: any, flashcardPayload: AddFlashcardPayload): Observable<Flashcard> {
+    return this.httpClient.post<Flashcard>(`${this.decksUrl}/${id}/flashcards`, flashcardPayload)
   }
 
 }

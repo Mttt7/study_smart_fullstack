@@ -5,6 +5,10 @@ import { Flashcard } from '../../models/Flashcard';
 import { FlashcardsPaginatedResponse } from '../../models/FlashcardsPaginatedResponse';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
+import { DialogService } from '../../services/dialog.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FlashcardService } from '../../services/flashcard.service';
+import { AddFlashcardPayload } from '../../models/AddFlashcardPayload';
 
 @Component({
   selector: 'app-deck-details',
@@ -12,6 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrl: './deck-details.component.scss'
 })
 export class DeckDetailsComponent {
+
 
 
 
@@ -25,7 +30,10 @@ export class DeckDetailsComponent {
 
 
   constructor(private route: ActivatedRoute,
-    private flashcardDeckService: FlashcardDeckService) { }
+    private flashcardDeckService: FlashcardDeckService,
+    private dialogService: DialogService,
+    private _snackBar: MatSnackBar,
+    private flashcardService: FlashcardService) { }
 
   ngOnInit(): void {
     this.deckId = Number(this.route.snapshot.params["id"]);
@@ -42,7 +50,7 @@ export class DeckDetailsComponent {
     return (data: any) => {
       this.flashcards = data.content as Flashcard[];
       this.length = data.totalElements;
-      console.log(data)
+
     }
   }
 
@@ -64,6 +72,26 @@ export class DeckDetailsComponent {
     this.getFlashcardsList(this.deckId);
   }
 
+
+  addFLashcard() {
+    this.dialogService.openAddFlashcardDialog().subscribe(
+      result => {
+        if (result !== undefined && result?.frontContent.trim() != '' && result?.backContent.trim() != '') {
+          const flashcardPayload: AddFlashcardPayload = new AddFlashcardPayload(result?.frontContent.trim(), result?.backContent.trim())
+          this.flashcardDeckService.addFlashcardToDeck(this.deckId, flashcardPayload).subscribe(() => {
+            let snackBarRef = this._snackBar.open('Flashcard Added', 'Ok', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            })
+            this.getFlashcardsList(this.deckId)
+
+          })
+
+        }
+      }
+    )
+  }
 
   editFlashcard(_t25: Flashcard) {
     throw new Error('Method not implemented.');

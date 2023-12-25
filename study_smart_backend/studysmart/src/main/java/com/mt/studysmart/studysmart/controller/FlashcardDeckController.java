@@ -1,5 +1,6 @@
 package com.mt.studysmart.studysmart.controller;
 
+import com.mt.studysmart.studysmart.dto.AddFlashcardPayload;
 import com.mt.studysmart.studysmart.dto.FlashcardDeckCreateDto;
 import com.mt.studysmart.studysmart.dto.NewNameDto;
 import com.mt.studysmart.studysmart.entity.CurrentSubdeck;
@@ -41,12 +42,13 @@ public class FlashcardDeckController {
     }
 
     @PostMapping("/{deckId}/flashcards")
-    Flashcard addFlashcardToDeck(@PathVariable Long deckId, @RequestBody Flashcard flashcard){
-        return this.flashcardDeckService.addFlashcardToDeck(deckId, flashcard);
+    Flashcard addFlashcardToDeck(@PathVariable Long deckId, @RequestBody AddFlashcardPayload flashcardPayload){
+        return this.flashcardDeckService.addFlashcardToDeck(deckId, flashcardPayload);
     }
 
     @PatchMapping("/{deckId}")
     FlashcardDeck ChangeFlashcardDeckName(@PathVariable Long deckId, @RequestBody NewNameDto name){
+
         return this.flashcardDeckService.ChangeFlashcardDeckName(deckId,name);
     }
 

@@ -1,5 +1,6 @@
 package com.mt.studysmart.studysmart.service;
 
+import com.mt.studysmart.studysmart.dto.AddFlashcardPayload;
 import com.mt.studysmart.studysmart.dto.FlashcardDeckCreateDto;
 import com.mt.studysmart.studysmart.dto.NewNameDto;
 import com.mt.studysmart.studysmart.entity.Flashcard;
@@ -16,7 +17,7 @@ public interface FlashcardDeckService {
 
     List<Flashcard> findFlashcardsByDeckId(Long id);
 
-    Flashcard addFlashcardToDeck(Long id, Flashcard flashcard);
+    Flashcard addFlashcardToDeck(Long id, AddFlashcardPayload flashcardPayload);
 
     FlashcardDeck createFlashcardDeck(FlashcardDeckCreateDto flashcardDeckCreateDto);
 

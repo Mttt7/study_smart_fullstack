@@ -2,6 +2,7 @@ package com.mt.studysmart.studysmart.service.serviceImpl;
 
 import com.mt.studysmart.studysmart.dao.FlashcardDeckRepository;
 import com.mt.studysmart.studysmart.dao.FlashcardRepository;
+import com.mt.studysmart.studysmart.dto.AddFlashcardPayload;
 import com.mt.studysmart.studysmart.dto.FlashcardDeckCreateDto;
 import com.mt.studysmart.studysmart.dto.NewNameDto;
 import com.mt.studysmart.studysmart.entity.Flashcard;
@@ -60,13 +61,14 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
     }
 
     @Override
-    public Flashcard addFlashcardToDeck(Long id, Flashcard flashcard) {
-        System.out.println(flashcard);
+    public Flashcard addFlashcardToDeck(Long id, AddFlashcardPayload flashcardPayload) {
+        Flashcard flashcard = new Flashcard();
+        flashcard.setFrontContent(flashcardPayload.getFrontContent());
+        flashcard.setBackContent(flashcardPayload.getBackContent());
         FlashcardDeck tempFlashcardDeck = this.findById(id);
         flashcard.setFlashcardDeck(tempFlashcardDeck);
         flashcard.setStatus(-1);
         flashcardRepository.save(flashcard);
-        System.out.println(flashcard);
         return flashcard;
     }
 
