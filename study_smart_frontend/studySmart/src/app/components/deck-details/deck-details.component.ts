@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { DialogService } from '../../services/dialog.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FlashcardService } from '../../services/flashcard.service';
-import { AddFlashcardPayload } from '../../models/AddFlashcardPayload';
+import { FlashcardPayload } from '../../models/FlashcardPayload';
 
 @Component({
   selector: 'app-deck-details',
@@ -23,7 +23,7 @@ export class DeckDetailsComponent {
   pageSize: number = 5;
   deckId: number = -1;
   flashcards: Flashcard[] = [];
-  showFlashcards: boolean = true;
+  showFlashcards: boolean = false;
   currentPage: number = 0;
   length: number = 0
 
@@ -77,7 +77,7 @@ export class DeckDetailsComponent {
     this.dialogService.openAddFlashcardDialog().subscribe(
       result => {
         if (result !== undefined && result?.frontContent.trim() != '' && result?.backContent.trim() != '') {
-          const flashcardPayload: AddFlashcardPayload = new AddFlashcardPayload(result?.frontContent.trim(), result?.backContent.trim())
+          const flashcardPayload: FlashcardPayload = new FlashcardPayload(result?.frontContent.trim(), result?.backContent.trim())
           this.flashcardDeckService.addFlashcardToDeck(this.deckId, flashcardPayload).subscribe(() => {
             let snackBarRef = this._snackBar.open('Flashcard Added', 'Ok', {
               duration: 3000,
@@ -93,11 +93,42 @@ export class DeckDetailsComponent {
     )
   }
 
-  editFlashcard(_t25: Flashcard) {
-    throw new Error('Method not implemented.');
+  editFlashcard(flashcard: Flashcard) {
+    this.dialogService.openEditFlashcardDialog(flashcard.frontContent, flashcard.backContent).subscribe(
+      result => {
+
+        if (result !== undefined && result?.frontContent.trim() != '' && result?.backContent.trim() != '') {
+          const flascardPayload = new FlashcardPayload(result.frontContent.trim(), result.backContent.trim())
+          this.flashcardService.updateFlashcard(flashcard, flascardPayload).subscribe(
+            data => {
+              let snackBarRef = this._snackBar.open('Flashcard Edited', 'Ok', {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              })
+              this.getFlashcardsList(this.deckId)
+
+            })
+        }
+      })
   }
-  deleteFlashcard(_t25: Flashcard) {
-    throw new Error('Method not implemented.');
+  deleteFlashcard(flashcard: Flashcard) {
+    this.dialogService.openDeleteDialog().subscribe(
+      result => {
+        if (result == 'delete') {
+          this.flashcardService.deleteFlashcardById(flashcard.id).subscribe(() => {
+            let snackBarRef = this._snackBar.open('Flashcard  Deleted!', 'Ok', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            })
+            this.getFlashcardsList(this.deckId);
+
+          })
+
+        }
+      }
+    )
   }
   toggleFlashcards() {
     this.showFlashcards = !this.showFlashcards;

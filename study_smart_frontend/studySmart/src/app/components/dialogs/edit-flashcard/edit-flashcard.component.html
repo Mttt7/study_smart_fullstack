@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="text">New Flashcard: </div>
+
+    <span>front content:</span><textarea #frontContent>{{ data.frontContent }} </textarea>
+    <span>back content:</span><textarea #backContent>{{ data.backContent }} </textarea>
+
+    <div class="buttons">
+        <div class="cancel" (click)="closeDialog({frontContent: '',backContent: ''})">Cancel</div>
+        <div class="yes" (click)="closeDialog({frontContent: frontContent.value,backContent: backContent.value})">
+            Edit
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DeleteDialogComponent } from '../components/dialogs/delete-dialog/delete-dialog.component';
 import { ChangeNameDialogComponent } from '../components/dialogs/change-name-dialog/change-name-dialog.component';
 import { AddFlashcardDialogComponent } from '../components/dialogs/add-flashcard-dialog/add-flashcard-dialog.component';
+import { EditFlashcardComponent } from '../components/dialogs/edit-flashcard/edit-flashcard.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,18 @@ export class DialogService {
   openAddFlashcardDialog() {
     const dialogRef: MatDialogRef<AddFlashcardDialogComponent> = this.dialog.open(AddFlashcardDialogComponent, {
       width: '600px',
+    });
+    return dialogRef.afterClosed();
+  }
+
+  openEditFlashcardDialog(frontContent: string, backContent: string) {
+    const dialogRef: MatDialogRef<EditFlashcardComponent> = this.dialog.open(EditFlashcardComponent, {
+      width: '600px',
+      data: {
+        frontContent: frontContent,
+        backContent: backContent
+      }
+
     });
     return dialogRef.afterClosed();
   }
