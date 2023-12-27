@@ -1,6 +1,6 @@
 <div style="padding-left: 5rem; padding-right: 5rem;padding-top: 2rem;">
     <div class="buttons">
-        <button type="button" class="btn btn-primary start-btn">Start</button>
+        <button type="button" class="btn btn-primary start-btn" [routerLink]="['./session']">Start</button>
         <button type="button" class="btn btn-primary" (click)="addFLashcard()">Add Flashcard</button>
 
         <button *ngIf="!showFlashcards" type="button" class="btn btn-primary" (click)="toggleFlashcards()">Show

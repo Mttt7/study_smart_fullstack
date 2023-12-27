@@ -23,4 +23,11 @@ export class FlashcardService {
     flashcard.backContent = flashcardPayload.getBackContent();
     return this.httpClient.put<Flashcard>(`${this.flashcardsUrl}`, flashcard)
   }
+
+  addScoreToFlashcard(flashcardId: number, score: number): Observable<Flashcard> {
+    console.log("addScoreToFlashcard")
+    console.log(flashcardId)
+    console.log(score)
+    return this.httpClient.patch<Flashcard>(`${this.flashcardsUrl}/${flashcardId}/addScore?score=${score}`, null)
+  }
 }

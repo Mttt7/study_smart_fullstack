@@ -1,0 +1,30 @@
+<div class="main-container">
+    id:{{getCurrentFlashcard()?.id}}
+    <hr>
+    frontContent:{{getCurrentFlashcard()?.frontContent}}
+    <hr>
+    backContent: {{getCurrentFlashcard()?.backContent}}
+    <hr>
+    score:{{getCurrentFlashcard()?.score}}
+    previousScore:{{getCurrentFlashcard()?.previousScore}}
+    status:{{getCurrentFlashcard()?.status}}
+    <hr>
+    currentSubdeck:{{getCurrentFlashcard()?.currentSubdeck?.id}}
+    <div class="content">
+        <div class="front-content">{{getCurrentFlashcard()?.frontContent}}</div>
+
+        <div class="back-content" *ngIf="backShown">{{getCurrentFlashcard()?.backContent}}</div>
+    </div>
+
+    <div class="buttons" *ngIf="!backShown">
+        <div class="button-show button" (click)="showBack()">Show</div>
+
+    </div>
+
+    <div class="buttons" *ngIf="backShown">
+        <div class="score0 button" (click)="addScore(0)">Again</div>
+        <div class="score1 button" (click)="addScore(1)">Hard</div>
+        <div class="score2 button" (click)="addScore(2)">Good</div>
+        <div class="score3 button" (click)="addScore(3)">Easy</div>
+    </div>
+</div>

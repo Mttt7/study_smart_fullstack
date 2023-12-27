@@ -18,6 +18,7 @@ import { ChangeNameDialogComponent } from './components/dialogs/change-name-dial
 import { DeckDetailsComponent } from './components/deck-details/deck-details.component';
 import { AddFlashcardDialogComponent } from './components/dialogs/add-flashcard-dialog/add-flashcard-dialog.component';
 import { EditFlashcardComponent } from './components/dialogs/edit-flashcard/edit-flashcard.component';
+import { StudySessionComponent } from './components/study-session/study-session.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { EditFlashcardComponent } from './components/dialogs/edit-flashcard/edit
     ChangeNameDialogComponent,
     DeckDetailsComponent,
     AddFlashcardDialogComponent,
-    EditFlashcardComponent
+    EditFlashcardComponent,
+    StudySessionComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { Flashcard } from '../models/Flashcard';
 import { FlashcardsPaginatedResponse } from '../models/FlashcardsPaginatedResponse';
 import { FlashcardDecksPaginatedResponse } from '../models/FlashcardDecksPaginatedResponse';
 import { FlashcardPayload } from '../models/FlashcardPayload';
+import { SubdeckResponse } from '../models/SubdeckResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,9 @@ export class FlashcardDeckService {
     return this.httpClient.post<Flashcard>(`${this.decksUrl}/${id}/flashcards`, flashcardPayload)
   }
 
+  getSubdeckByDeckId(deckId: number, size: number): Observable<SubdeckResponse> {
+    return this.httpClient.get<SubdeckResponse>(`${this.decksUrl}/${deckId}/subdeck?size=${size}`)
+  }
 
 
 }

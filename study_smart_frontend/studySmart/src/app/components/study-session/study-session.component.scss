@@ -1,0 +1,75 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.buttons {
+    margin-top: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 2rem;
+
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+    gap: 4rem;
+    font-size: 2rem;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    width: 80px;
+    padding: 0.3rem;
+    background-color: red;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button-score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    width: 80px;
+    padding: 0.3rem;
+    background-color: red;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button-show {
+    background-color: rgb(67, 161, 255);
+}
+
+.button-score:hover {
+    transform: scale(1.03);
+}
+
+.score0 {
+    background-color: rgb(255, 67, 67);
+}
+
+.score1 {
+    background-color: rgb(255, 149, 67);
+}
+
+.score2 {
+    background-color: rgb(67, 161, 255);
+}
+
+.score3 {
+    background-color: rgb(117, 255, 67);
+
+
+}
