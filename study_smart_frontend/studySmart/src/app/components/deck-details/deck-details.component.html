@@ -1,22 +1,32 @@
 <div style="padding-left: 5rem; padding-right: 5rem;padding-top: 2rem;">
     <div class="buttons">
-        <button type="button" class="btn btn-primary start-btn" [routerLink]="['./session']">Start</button>
-        <button type="button" class="btn btn-primary" (click)="addFLashcard()">Add Flashcard</button>
+        <div class="start-button">
+            <button type="button" class="btn btn-primary start-btn" [routerLink]="['./session']">Start</button>
+        </div>
+        <div class="secondary-buttons">
+            <button type="button" class="btn btn-primary" (click)="showSettings()">Settings</button>
+            <button type="button" class="btn btn-primary" (click)="addFlashcard()">Add Flashcard</button>
 
-        <button *ngIf="!showFlashcards" type="button" class="btn btn-primary" (click)="toggleFlashcards()">Show
-            Flashcards</button>
-        <button *ngIf="showFlashcards" type="button" class="btn btn-primary" (click)="toggleFlashcards()">Hide
-            Flashcards</button>
+            <button *ngIf="!showFlashcards" type="button" class="btn btn-primary" (click)="toggleFlashcards()">Show
+                Flashcards</button>
+            <button *ngIf="showFlashcards" type="button" class="btn btn-primary" (click)="toggleFlashcards()">Hide
+                Flashcards</button>
+        </div>
+
+    </div>
+    <div class="info-points">
+        <div>🔵-no reviews yet 🔴- very hard 🟠-hard 🟡-almost learnt 🟢-learnt</div>
+
     </div>
 
     <div *ngIf="showFlashcards">
         <table class="table  table-border table-hover flashcard-list">
             <thead class=" thead-dark">
                 <tr>
-                    <th>Front</th>
-                    <th>Back</th>
-                    <th>Status</th>
-                    <th>Created</th>
+                    <th class="text-center">Front</th>
+                    <th class="text-center">Back</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Last Review</th>
                     <th></th>
                 </tr>
             </thead>
@@ -24,10 +34,10 @@
             <tbody>
                 <tr *ngFor="let flashcard of flashcards">
 
-                    <td class="hover" routerLink="">{{flashcard.frontContent | slice:0:30}}</td>
-                    <td class="hover" routerLink="">{{flashcard.backContent | slice:0:30}}</td>
-                    <td class="hover" routerLink="">{{getStatusOfFlashcard(flashcard)}}</td>
-                    <td class="hover" routerLink="">{{flashcard.dateCreated | date: "dd MMM yyyy"}}</td>
+                    <td class="hover text-center" routerLink="">{{flashcard.frontContent | slice:0:30}}</td>
+                    <td class="hover text-center" routerLink="">{{flashcard.backContent | slice:0:30}}</td>
+                    <td class="hover text-center" routerLink="">{{getStatusOfFlashcard(flashcard)}}</td>
+                    <td class="hover text-center" routerLink="">{{flashcard.lastUpdated | date: "dd MMM yyyy"}}</td>
 
 
                     <td>

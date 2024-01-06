@@ -27,4 +27,7 @@ public interface FlashcardDeckService {
 
 
     Page<Flashcard> findFlashcardsByDeckIdWithPagination(Long deckId, Pageable pageable);
+
+    FlashcardDeck changeDayLimit(Long deckId, Long dayLimit);
+
 }

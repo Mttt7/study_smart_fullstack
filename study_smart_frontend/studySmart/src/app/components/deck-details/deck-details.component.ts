@@ -20,6 +20,7 @@ export class DeckDetailsComponent {
 
 
 
+
   pageSize: number = 5;
   deckId: number = -1;
   flashcards: Flashcard[] = [];
@@ -56,12 +57,12 @@ export class DeckDetailsComponent {
 
 
   getStatusOfFlashcard(flashcard: Flashcard): string {
-    if (flashcard.status === -1) return 'blue'
-    if (flashcard.status === 0) return 'yellow'
-    if (flashcard.status === 0 && flashcard.score + flashcard.previousScore <= 1) return 'red'
+    if (flashcard.status === -1) return '🔵'
+    if (flashcard.status === 0 && flashcard.score + flashcard.previousScore <= 1) return '🔴'
+    if (flashcard.status === 0 && flashcard.score + flashcard.previousScore >= 1 && flashcard.score + flashcard.previousScore <= 4) return '🟠'
 
-    if (flashcard.status === 0 && flashcard.score + flashcard.previousScore >= 4) return 'yellow'
-    if (flashcard.status === 1) return 'green'
+    if (flashcard.status === 0 && flashcard.score + flashcard.previousScore >= 4) return '🟡'
+    if (flashcard.status === 1) return '🟢'
     return '';
   }
 
@@ -73,7 +74,7 @@ export class DeckDetailsComponent {
   }
 
 
-  addFLashcard() {
+  addFlashcard() {
     this.dialogService.openAddFlashcardDialog().subscribe(
       result => {
         if (result !== undefined && result?.frontContent.trim() != '' && result?.backContent.trim() != '') {
@@ -132,5 +133,28 @@ export class DeckDetailsComponent {
   }
   toggleFlashcards() {
     this.showFlashcards = !this.showFlashcards;
+  }
+  showSettings() {
+    this.flashcardDeckService.getDeckById(this.deckId).subscribe(
+      data => {
+
+        this.dialogService.openSettingsDialog(data.dayLimit).subscribe(
+          result => {
+            result = Number(result)
+            if (result > 0) {
+              this.flashcardDeckService.changeDayLimit(this.deckId, result).subscribe(
+                () => { }
+              )
+            } else {
+              let snackBarRef = this._snackBar.open('Day limit must be greater than 0', 'Ok', {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              })
+            }
+          }
+        )
+      }
+    )
   }
 }

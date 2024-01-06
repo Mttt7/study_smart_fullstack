@@ -33,7 +33,7 @@ public class FlashcardController {
         return this.flashcardService.updateFlashcard(flashcardUpdateDto);
     }
 
-    @PatchMapping("/{id}/addScore")
+    @PostMapping("/{id}/addScore")
     Flashcard addScore(@PathVariable Long id, @RequestParam int score){
         return flashcardService.addScore(id,score);
     }

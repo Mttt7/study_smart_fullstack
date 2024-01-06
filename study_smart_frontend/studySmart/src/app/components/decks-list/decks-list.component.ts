@@ -64,6 +64,10 @@ export class DecksListComponent {
       }
     )
   }
+  getDailyGoal(deck: FlashcardDeck): string {
+    if (deck.reviewedToday == null) return '0%'
+    return Math.round((deck.reviewedToday / deck.dayLimit) * 1000) / 10 + '%'
+  }
   renameDeck(deck: FlashcardDeck) {
     this.dialogService.openChangeNameDialog().subscribe(
       result => {

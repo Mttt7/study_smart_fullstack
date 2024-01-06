@@ -26,6 +26,28 @@ public class FlashcardDeckController {
     private final CurrentSubdeckService currentSubdeckService;
 
 
+    @GetMapping("/{deckId}")
+    FlashcardDeck getFlashcardDeckById(@PathVariable Long deckId){
+        return this.flashcardDeckService.findById(deckId);
+    }
+    //@PostMapping("/{deckId}/")
+
+    @PatchMapping("/{deckId}/changeDayLimit")
+    FlashcardDeck changeDayLimit(@PathVariable Long deckId, @RequestParam Long dayLimit){
+        return this.flashcardDeckService.changeDayLimit(deckId,dayLimit);
+    }
+
+    @PatchMapping("/{deckId}")
+    FlashcardDeck ChangeFlashcardDeckName(@PathVariable Long deckId, @RequestBody NewNameDto name){
+        return this.flashcardDeckService.ChangeFlashcardDeckName(deckId,name);
+    }
+
+    @DeleteMapping("/{deckId}")
+    void DeleteFlashcardDeck(@PathVariable Long deckId){
+        this.flashcardDeckService.deleteFlashcardDeck(deckId);
+    }
+
+
 
     @PostMapping("/")
     FlashcardDeck createFlashcardDeck(@RequestBody FlashcardDeckCreateDto flashcardDeckCreateDto){
@@ -46,22 +68,13 @@ public class FlashcardDeckController {
         return this.flashcardDeckService.addFlashcardToDeck(deckId, flashcardPayload);
     }
 
-    @PatchMapping("/{deckId}")
-    FlashcardDeck ChangeFlashcardDeckName(@PathVariable Long deckId, @RequestBody NewNameDto name){
-
-        return this.flashcardDeckService.ChangeFlashcardDeckName(deckId,name);
-    }
-
-    @DeleteMapping("/{deckId}")
-    void DeleteFlashcardDeck(@PathVariable Long deckId){
-         this.flashcardDeckService.deleteFlashcardDeck(deckId);
-    }
-
 
     @GetMapping("/{deckId}/subdeck")
-    public CurrentSubdeck getCurrentSubdeckByDeckId(@PathVariable Long deckId,@RequestParam int size){
-        return currentSubdeckService.getCurrentSubdeck(deckId,size);
+    public CurrentSubdeck getCurrentSubdeckByDeckId(@PathVariable Long deckId){
+        return currentSubdeckService.getCurrentSubdeck(deckId);
     }
+
+
 
 
 }

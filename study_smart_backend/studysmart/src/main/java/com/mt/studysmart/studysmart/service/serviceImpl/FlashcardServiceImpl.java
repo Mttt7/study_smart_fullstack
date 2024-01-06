@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -65,8 +67,10 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public List<Flashcard> findBySubdeckId(Long id) {
-        return flashcardRepository.findAllByCurrentSubdeck_Id(id);
+    public List<Flashcard> findBySubdeckId(Long id) {//albow czensije sprawdzac czy nie null?? nw
+        List<Flashcard> tempFlashcards = flashcardRepository.findAllByCurrentSubdeck_IdAndCurrentSubdeckNotNull(id);
+
+        return tempFlashcards;
     }
 
     @Override
@@ -101,25 +105,37 @@ public class FlashcardServiceImpl implements FlashcardService {
     public Flashcard addScore(Long id, int score) {
         Flashcard flashcard = this.findById(id);
         if(score==3 && flashcard.getScore()==3 && flashcard.getPreviousScore()==3){
-            updateSubdeck(flashcard);
+            flashcard.setStatus(1);
+            CurrentSubdeck tempSubdeck = flashcard.getCurrentSubdeck();
+            flashcard.setCurrentSubdeck(null);
+            currentSubdeckService.updateSubdeck(tempSubdeck,flashcard.getFlashcardDeck());
         }else{
             flashcard.setPreviousScore(flashcard.getScore());
             flashcard.setScore(score);
         }
+        Long flashcardsReviewedSoFarCount = flashcard.getFlashcardDeck().getReviewedToday();
+        if(flashcardsReviewedSoFarCount==null){
+            System.out.println("LONG NULLLLLEEEEEMMM JEST !!!!!!");
+            flashcard.getFlashcardDeck().setReviewedToday(0L);
+            flashcardsReviewedSoFarCount = 0L;
+        }
+        flashcard.getFlashcardDeck().setReviewedToday(flashcardsReviewedSoFarCount+1);
+
         return this.save(flashcard);
 
     }
 
-    private void updateSubdeck(Flashcard flashcard) {
-        CurrentSubdeck currentSubdeck = flashcard.getCurrentSubdeck();
-        flashcard.setStatus(1);
-        flashcard.setCurrentSubdeck(null);
+//    private void updateSubdeck(Flashcard flashcard) {
+//        CurrentSubdeck currentSubdeck = flashcard.getCurrentSubdeck();
+//        flashcard.setStatus(1);
+//        flashcard.setCurrentSubdeck(null);
+//
+//        this.currentSubdeckService.addNewFlashcardToSubdeck(currentSubdeck);
+//    }
 
-        this.currentSubdeckService.addNewFlashcardToSubdeck(currentSubdeck);
-    }
-
-    public Flashcard findPristineFlashcard(){
-        Flashcard newFlashcard = this.flashcardRepository.findFirstFlashcardByStatus(-1);
+    public Flashcard findPristineFlashcardFromDeckId(Long deckId){
+        Flashcard newFlashcard = this.flashcardRepository.findFirstByFlashcardDeck_IdAndStatus(deckId,-1);
+        System.out.println("find pristine:"+newFlashcard);
         return newFlashcard;
     }
 

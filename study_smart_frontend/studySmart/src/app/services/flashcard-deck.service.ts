@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FlashcardDeck } from '../models/FlashcardDeck';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Flashcard } from '../models/Flashcard';
 import { FlashcardsPaginatedResponse } from '../models/FlashcardsPaginatedResponse';
 import { FlashcardDecksPaginatedResponse } from '../models/FlashcardDecksPaginatedResponse';
@@ -16,11 +16,15 @@ export class FlashcardDeckService {
 
 
 
+
   private decksUrl = 'http://localhost:5000/api/decks';
   private usersUrl = 'http://localhost:5000/api/profiles';
 
-
   constructor(private httpClient: HttpClient) { }
+
+  getDeckById(id: number): Observable<FlashcardDeck> {
+    return this.httpClient.get<FlashcardDeck>(`${this.decksUrl}/${id}`)
+  }
 
   getDeckListByUserId(userId: number): Observable<FlashcardDeck[]> {
     //1 now is hardcoded
@@ -55,13 +59,17 @@ export class FlashcardDeckService {
   }
 
   addFlashcardToDeck(id: any, flashcardPayload: FlashcardPayload): Observable<Flashcard> {
+
     return this.httpClient.post<Flashcard>(`${this.decksUrl}/${id}/flashcards`, flashcardPayload)
   }
 
-  getSubdeckByDeckId(deckId: number, size: number): Observable<SubdeckResponse> {
-    return this.httpClient.get<SubdeckResponse>(`${this.decksUrl}/${deckId}/subdeck?size=${size}`)
+  getSubdeckByDeckId(deckId: number): Observable<SubdeckResponse> {
+    return this.httpClient.get<SubdeckResponse>(`${this.decksUrl}/${deckId}/subdeck`)
   }
 
+  changeDayLimit(deckId: number, dayLimit: number): Observable<FlashcardDeck> {
+    return this.httpClient.patch<FlashcardDeck>(`${this.decksUrl}/${deckId}/changeDayLimit?dayLimit=${dayLimit}`, null)
+  }
 
 }
 

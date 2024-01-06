@@ -1,10 +1,12 @@
 package com.mt.studysmart.studysmart.service;
 
 import com.mt.studysmart.studysmart.entity.CurrentSubdeck;
+import com.mt.studysmart.studysmart.entity.FlashcardDeck;
 
 public interface CurrentSubdeckService {
-    CurrentSubdeck getCurrentSubdeck(Long deckId,int size);
+    CurrentSubdeck getCurrentSubdeck(Long deckId);
 
-   void addNewFlashcardToSubdeck(CurrentSubdeck currentSubdeck);
+    void updateSubdeck(CurrentSubdeck currentSubdeck, FlashcardDeck flashcardDeck);
+   //void addNewFlashcardToSubdeck(CurrentSubdeck currentSubdeck);
 
 }

@@ -56,6 +56,17 @@
     transform: scale(1.03);
 }
 
+.back-button {
+    background-color: lightblue;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.back-button:hover {
+    transform: scale(1.03);
+}
+
 .score0 {
     background-color: rgb(255, 67, 67);
 }
@@ -72,4 +83,14 @@
     background-color: rgb(117, 255, 67);
 
 
+}
+
+.completion-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .info {
+        font-size: 1.1rem;
+    }
 }

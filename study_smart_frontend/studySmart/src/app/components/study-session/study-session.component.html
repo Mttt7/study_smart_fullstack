@@ -1,30 +1,33 @@
-<div class="main-container">
-    id:{{getCurrentFlashcard()?.id}}
-    <hr>
-    frontContent:{{getCurrentFlashcard()?.frontContent}}
-    <hr>
-    backContent: {{getCurrentFlashcard()?.backContent}}
-    <hr>
-    score:{{getCurrentFlashcard()?.score}}
-    previousScore:{{getCurrentFlashcard()?.previousScore}}
-    status:{{getCurrentFlashcard()?.status}}
-    <hr>
-    currentSubdeck:{{getCurrentFlashcard()?.currentSubdeck?.id}}
-    <div class="content">
-        <div class="front-content">{{getCurrentFlashcard()?.frontContent}}</div>
+<mat-progress-bar [value]="progressBarValue">
+</mat-progress-bar>
 
-        <div class="back-content" *ngIf="backShown">{{getCurrentFlashcard()?.backContent}}</div>
+
+
+<div class="main-container" *ngIf="currentFlashcardId!==-1">
+    <div class="completion-section" *ngIf="goalCompleted">
+        <div class="info">Daily Goal Completed!</div>
+        <div class="btn btn-primary" style="margin: .5rem;" routerLink="../">Back</div>
     </div>
+    <div class="content">
+        <div class="front-content">{{subdeck[currentFlashcardId]?.frontContent}}</div>
 
+        <div class="back-content" *ngIf="backShown">{{subdeck[currentFlashcardId]?.backContent}}</div>
+    </div>
     <div class="buttons" *ngIf="!backShown">
         <div class="button-show button" (click)="showBack()">Show</div>
 
     </div>
-
     <div class="buttons" *ngIf="backShown">
         <div class="score0 button" (click)="addScore(0)">Again</div>
         <div class="score1 button" (click)="addScore(1)">Hard</div>
         <div class="score2 button" (click)="addScore(2)">Good</div>
         <div class="score3 button" (click)="addScore(3)">Easy</div>
+    </div>
+</div>
+<div class="main-container" *ngIf="currentFlashcardId===-1">
+    <div class="content">
+        <div class="front-content">No flashcards to study</div>
+        <div class="front-content">Come back tommorow</div>
+        <div class="button back-button" routerLink="../">Back</div>
     </div>
 </div>

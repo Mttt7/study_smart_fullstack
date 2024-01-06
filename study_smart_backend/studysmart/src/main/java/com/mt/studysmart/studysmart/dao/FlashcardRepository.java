@@ -13,7 +13,7 @@ public interface FlashcardRepository extends JpaRepository<Flashcard,Long> {
 
     Page<Flashcard> findAllByFlashcardDeck_Id(Long id, Pageable pageable);
 
-    List<Flashcard> findAllByCurrentSubdeck_Id(Long id);
+    List<Flashcard> findAllByCurrentSubdeck_IdAndCurrentSubdeckNotNull(Long id);
 
 //    @Query(value = "SELECT f FROM Flashcard f ORDER BY f.score ASC")
 //    List<Flashcard> findFlashcardsWithLowestScore(@Param("limit") int limit);
@@ -23,6 +23,8 @@ public interface FlashcardRepository extends JpaRepository<Flashcard,Long> {
 
     Long countByFlashcardDeckId(Long deckId);
 
-    Flashcard findFirstFlashcardByStatus(int status);
+
+    Flashcard findFirstByFlashcardDeck_IdAndStatus(Long deckId,int status);
+
 
 }

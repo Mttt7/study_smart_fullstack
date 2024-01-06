@@ -15,4 +15,6 @@ export class SubdeckService {
   getFlashcardsBySubdeckId(id: number): Observable<Flashcard[]> {
     return this.httpClient.get<Flashcard[]>(`${this.subdeckUrl}/${id}/flashcards`)
   }
+
+
 }

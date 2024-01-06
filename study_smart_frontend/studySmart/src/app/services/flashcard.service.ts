@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Flashcard } from '../models/Flashcard';
 import { FlashcardPayload } from '../models/FlashcardPayload';
+import { FlashcardDeckService } from './flashcard-deck.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,12 @@ export class FlashcardService {
 
   private flashcardsUrl = 'http://localhost:5000/api/flashcards';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private flashcardDeckService: FlashcardDeckService) { }
+
+  getFlashcardById(id: number): Observable<Flashcard> {
+    return this.httpClient.get<Flashcard>(`${this.flashcardsUrl}/${id}`)
+  }
 
   deleteFlashcardById(id: number): Observable<null> {
     return this.httpClient.delete<null>(`${this.flashcardsUrl}/${id}`)
@@ -25,9 +31,9 @@ export class FlashcardService {
   }
 
   addScoreToFlashcard(flashcardId: number, score: number): Observable<Flashcard> {
-    console.log("addScoreToFlashcard")
-    console.log(flashcardId)
-    console.log(score)
-    return this.httpClient.patch<Flashcard>(`${this.flashcardsUrl}/${flashcardId}/addScore?score=${score}`, null)
+    return this.httpClient.post<Flashcard>(`${this.flashcardsUrl}/${flashcardId}/addScore?score=${score}`, null)
   }
+
+
+
 }

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FlashcardDeckService } from '../../services/flashcard-deck.service';
 import { Flashcard } from '../../models/Flashcard';
 import { SubdeckService } from '../../services/subdeck.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardService } from '../../services/flashcard.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-study-session',
@@ -13,6 +14,7 @@ import { FlashcardService } from '../../services/flashcard.service';
 export class StudySessionComponent {
 
 
+
   deckId: number = -1;
   subdeckId: number = -1;
   size: number = 3;
@@ -20,44 +22,42 @@ export class StudySessionComponent {
   currentFlashcardId: number = 0;
   backShown: boolean = false;
 
+  reviewedToday: number = 0;
+  dayLimit: number = 0
+  progressBarValue: number = 10;
+  goalCompleted: boolean = false;
+
+
   constructor(private flashcardDeckService: FlashcardDeckService,
     private subdeckService: SubdeckService, private route: ActivatedRoute,
-    private flashcardService: FlashcardService) { }
+    private flashcardService: FlashcardService, private router: Router,
+    private _snackBar: MatSnackBar) { }
+
   ngOnInit(): void {
-    this.getSubdeck();
-
-
+    this.updateSubdeck();
   }
 
-  getSubdeck() {
+  updateSubdeck() {
     this.deckId = Number(this.route.snapshot.params["id"]);
-    this.flashcardDeckService.getSubdeckByDeckId(this.deckId, this.size).subscribe(
+    this.flashcardDeckService.getSubdeckByDeckId(this.deckId).subscribe(
       data => {
         this.subdeckId = data.id;
         this.subdeckService.getFlashcardsBySubdeckId(this.subdeckId).subscribe(
           data => {
             this.subdeck = data as Flashcard[];
-            console.log(this.subdeck);
+            this.proceedNextFlashcardId();
           }
         )
       }
     )
   }
 
-  getCurrentFlashcard() {
-    return this.subdeck[this.currentFlashcardId];
-  }
-
   addScore(score: number) {
-    if (score === 3 && this.getCurrentFlashcard().score === 3 && this.getCurrentFlashcard().previousScore === 3) {
-      console.log("!!!!!!!!")
-      this.getSubdeck();
-    }
-    this.flashcardService.addScoreToFlashcard(this.getCurrentFlashcard().id, score).subscribe(
+    let id = this.subdeck[this.currentFlashcardId].id;
+    this.flashcardService.addScoreToFlashcard(id, score).subscribe(
       () => {
-        this.proceedNextFlashcardId();
+        this.updateSubdeck();
       }
-
     )
   }
   showBack() {
@@ -66,12 +66,40 @@ export class StudySessionComponent {
 
   proceedNextFlashcardId() {
     let length = this.subdeck.length;
+    if (length == 0) {
+      this.currentFlashcardId = -1;
+      return;
+    }
+    this.updateProgressBar();
+
     let nextId = Math.floor(Math.random() * length);
     this.currentFlashcardId = nextId;
     this.backShown = false;
   }
 
 
+  updateProgressBar() {
+    this.flashcardDeckService.getDeckById(this.deckId).subscribe(
+      data => {
+        this.reviewedToday = data.reviewedToday;
+        this.dayLimit = data.dayLimit;
+        this.progressBarValue = Math.round((this.reviewedToday / this.dayLimit) * 100);
+        if (this.progressBarValue > 99) {
+          this.showCompletionInfo();
+        }
+      }
+    )
+  }
+  showCompletionInfo() {
+    if (!this.goalCompleted) {
+      let snackBarRef = this._snackBar.open(`Daily Goal Completed!`, 'OK', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      })
+    }
+    this.goalCompleted = true;
 
+  }
 
 }

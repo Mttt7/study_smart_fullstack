@@ -26,8 +26,8 @@ public class FlashcardDeck {
     @Column(name = "day_limit")
     private Long dayLimit;
 
-    @Column(name = "new_flashcards_today")
-    private Long newFlashcardsToday;
+    @Column(name = "reviewed_today")
+    private Long reviewedToday;
 
     @Column(name = "date_created")
     @CreationTimestamp

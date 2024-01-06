@@ -3,8 +3,8 @@
         <thead class="thead-dark">
             <tr>
                 <th>Name</th>
-                <th>Flashcards</th>
-                <th>Learnt %</th>
+                <th>reviewed today</th>
+                <th>Goal %</th>
                 <th>Created</th>
                 <th></th>
             </tr>
@@ -14,8 +14,9 @@
             <tr *ngFor="let deck of decks">
 
                 <td class="hover" routerLink="/deck/{{deck.id}}">{{deck.name}}</td>
-                <td class="hover" routerLink="/deck/{{deck.id}}">69</td>
-                <td class="hover" routerLink="/deck/{{deck.id}}">69%</td>
+                <td class="hover" routerLink="/deck/{{deck.id}}">
+                    {{deck.reviewedToday==null?'0/'+deck.dayLimit:deck.reviewedToday+'/'+deck.dayLimit}}</td>
+                <td class="hover" routerLink="/deck/{{deck.id}}">{{getDailyGoal(deck)}}</td>
                 <td class="hover" routerLink="/deck/{{deck.id}}">{{deck.dateCreated | date:"dd-MM-yyy"}}</td>
                 <td>
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

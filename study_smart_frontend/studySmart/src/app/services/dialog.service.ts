@@ -5,6 +5,7 @@ import { DeleteDialogComponent } from '../components/dialogs/delete-dialog/delet
 import { ChangeNameDialogComponent } from '../components/dialogs/change-name-dialog/change-name-dialog.component';
 import { AddFlashcardDialogComponent } from '../components/dialogs/add-flashcard-dialog/add-flashcard-dialog.component';
 import { EditFlashcardComponent } from '../components/dialogs/edit-flashcard/edit-flashcard.component';
+import { SettingsDialogComponent } from '../components/dialogs/settings-dialog/settings-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,16 @@ export class DialogService {
       data: {
         frontContent: frontContent,
         backContent: backContent
+      }
+
+    });
+    return dialogRef.afterClosed();
+  }
+  openSettingsDialog(dayLimit: number) {
+    const dialogRef: MatDialogRef<SettingsDialogComponent> = this.dialog.open(SettingsDialogComponent, {
+      width: '400px',
+      data: {
+        dayLimit: dayLimit
       }
 
     });

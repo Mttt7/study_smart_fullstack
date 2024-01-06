@@ -22,29 +22,24 @@ public class CurrentSubdeckServiceImpl implements CurrentSubdeckService {
     private final FlashcardService flashcardService;
 
 
-
     @Override
-    public CurrentSubdeck getCurrentSubdeck(Long deckId,int size) {
-        if(flashcardDeckService.findById(deckId)==null){
+    public CurrentSubdeck getCurrentSubdeck(Long deckId) {
+        FlashcardDeck flashcardDeck = flashcardDeckService.findById(deckId);
+        System.out.println(flashcardDeck);
+        if (flashcardDeck == null) {
             return null;
         }
-        FlashcardDeck flashcardDeck =  flashcardDeckService.findById(deckId);
+
         CurrentSubdeck currentSubdeck = currentSubdeckRepository.findByFlashcardDeckId(deckId);
-        if(currentSubdeck == null){
+        System.out.println(currentSubdeck);
+        if (currentSubdeck == null) {
             currentSubdeck = new CurrentSubdeck();
-
-
-            if(size==0){
-                currentSubdeck.setSize(10);
-            }else{
-                currentSubdeck.setSize(size);
-            }
-
             flashcardDeck.setCurrentSubdeck(currentSubdeck);
             currentSubdeck.setFlashcardDeck(flashcardDeck);
-            populateSubdeck(currentSubdeck,flashcardDeck);
-            currentSubdeckRepository.save(currentSubdeck);
+            currentSubdeck.setSize(5);
         }
+        updateSubdeck(currentSubdeck,flashcardDeck);
+        currentSubdeckRepository.save(currentSubdeck);
 
         flashcardDeck.setLastUpdated(new Timestamp(System.currentTimeMillis()));
         flashcardDeckService.save(flashcardDeck);
@@ -53,36 +48,68 @@ public class CurrentSubdeckServiceImpl implements CurrentSubdeckService {
     }
 
 
+//    public void addNewFlashcardToSubdeck(CurrentSubdeck currentSubdeck) {
+//        Flashcard flashcard = this.flashcardService.findPristineFlashcard();
+//        if (flashcard != null) {
+//            flashcard.setCurrentSubdeck(currentSubdeck);
+//            flashcard.setStatus(0);
+//        }
+//        this.flashcardService.save(flashcard);
+//    }
 
-    public void addNewFlashcardToSubdeck(CurrentSubdeck currentSubdeck){
-        Flashcard flashcard = this.flashcardService.findPristineFlashcard();
-        if(flashcard != null){
-            flashcard.setCurrentSubdeck(currentSubdeck);
-            flashcard.setStatus(0);
-        }
-        this.flashcardService.save(flashcard);
-    }
 
+    public void updateSubdeck(CurrentSubdeck currentSubdeck, FlashcardDeck flashcardDeck) {
+        System.out.println("=====CURRENT SUBDECK: "+ currentSubdeck);
+        int subdeckSize = currentSubdeck.getSize();
+        //tutaj blad, id jest nullem i znajduje wszystkie fiszki ktore maja null i wychodzi z 41
+        List<Flashcard> flashcardsInSubdeck = flashcardService.findBySubdeckId(currentSubdeck.getId());
+        int subdeckLength = flashcardsInSubdeck.size();
+        System.out.println(flashcardsInSubdeck);
+        System.out.println("SUBDECK LENGTH:"+subdeckLength);
+        System.out.println("SUBDECK SIZE"+ subdeckSize);
+        if(subdeckLength<subdeckSize){
+            System.out.println("MNIEJSZY!!!!");
+            int flashcardsToAdd = subdeckSize-subdeckLength;
+            for(int i=0;i<flashcardsToAdd;i++){
+                Flashcard tempFlashcard = flashcardService.findPristineFlashcardFromDeckId(flashcardDeck.getId());
+                System.out.println("FLaschabrd: "+ tempFlashcard);
+                if(tempFlashcard==null){break;}
 
-    private void populateSubdeck(CurrentSubdeck currentSubdeck, FlashcardDeck flashcardDeck){
-        Long flashcardDeckSize = flashcardService.countByFlashcardDeckId(flashcardDeck.getId());
-        if(currentSubdeck.getSize()>=flashcardDeckSize){
-            List<Flashcard> tempFlashcards =  flashcardService.findAllByFlashcardDeck_Id(flashcardDeck.getId());
-            tempFlashcards.forEach(flashcard -> {
-                flashcard.setCurrentSubdeck(currentSubdeck);
-                flashcard.setStatus(0);
-                flashcardService.save(flashcard);
-            });
-        }else{
-            int size = currentSubdeck.getSize();
-            List<Flashcard> tempFlashcards = flashcardService.populateSubdeck(size,flashcardDeck.getId());
+                tempFlashcard.setCurrentSubdeck(currentSubdeck);
+                tempFlashcard.setStatus(0);
+                System.out.println(tempFlashcard);
+                flashcardService.save(tempFlashcard);
+            }
 
-            tempFlashcards.forEach(flashcard ->{
-
-                    flashcard.setCurrentSubdeck(currentSubdeck);
-                    flashcard.setStatus(0);
-                    flashcardService.save(flashcard);
-            });
         }
     }
 }
+
+
+
+
+
+
+
+
+//        Long flashcardDeckSize = flashcardService.countByFlashcardDeckId(flashcardDeck.getId());
+//        if(currentSubdeck.getSize()>=flashcardDeckSize){
+//            List<Flashcard> tempFlashcards =  flashcardService.findAllByFlashcardDeck_Id(flashcardDeck.getId());
+//            tempFlashcards.forEach(flashcard -> {
+//                flashcard.setCurrentSubdeck(currentSubdeck);
+//                flashcard.setStatus(0);
+//                flashcardService.save(flashcard);
+//            });
+//        }else{
+//            int size = currentSubdeck.getSize();
+//            List<Flashcard> tempFlashcards = flashcardService.populateSubdeck(size,flashcardDeck.getId());
+//
+//            tempFlashcards.forEach(flashcard ->{
+//
+//                    flashcard.setCurrentSubdeck(currentSubdeck);
+//                    flashcard.setStatus(0);
+//                    flashcardService.save(flashcard);
+//            });
+////        }
+//    }
+//}

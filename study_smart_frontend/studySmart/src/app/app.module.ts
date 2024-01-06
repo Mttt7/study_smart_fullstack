@@ -8,9 +8,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { DeckFormComponent } from './components/deck-form/deck-form.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -19,6 +19,7 @@ import { DeckDetailsComponent } from './components/deck-details/deck-details.com
 import { AddFlashcardDialogComponent } from './components/dialogs/add-flashcard-dialog/add-flashcard-dialog.component';
 import { EditFlashcardComponent } from './components/dialogs/edit-flashcard/edit-flashcard.component';
 import { StudySessionComponent } from './components/study-session/study-session.component';
+import { SettingsDialogComponent } from './components/dialogs/settings-dialog/settings-dialog.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { StudySessionComponent } from './components/study-session/study-session.
     DeckDetailsComponent,
     AddFlashcardDialogComponent,
     EditFlashcardComponent,
-    StudySessionComponent
+    StudySessionComponent,
+    SettingsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,9 @@ import { StudySessionComponent } from './components/study-session/study-session.
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressBarModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -52,12 +53,84 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
 
     @Override
     public List<Flashcard> findFlashcardsByDeckId(Long id) {
+//        List<Flashcard> tempFlashcards = flashcardRepository.findAllByFlashcardDeck_Id(id);
+//        LocalDate today = LocalDate.now();
+//        for (Flashcard f:
+//             tempFlashcards) {
+//            LocalDate lastUpdatedDate = f.getLastUpdated().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//
+//            //Check if more than 1 day passed
+//            if(today.isAfter(lastUpdatedDate.plusDays(1))){
+//                if(f.getScore()+f.getPreviousScore()>2){
+//                    f.setScore(1);
+//                    f.setPreviousScore(1);
+//                }
+//                //Check if more than 3 day passed
+//            }else if(today.isAfter(lastUpdatedDate.plusDays(3))){
+//                if(f.getScore()+f.getPreviousScore()>2){
+//                    f.setScore(0);
+//                    f.setPreviousScore(0);
+//                }
+//            }
+//
+//            if(f.getStatus())
+//
+//
+//            flashcardRepository.save(f);
+//        }
         return flashcardRepository.findAllByFlashcardDeck_Id(id);
     }
 
     @Override
     public Page<Flashcard> findFlashcardsByDeckIdWithPagination(Long deckId, Pageable pageable) {
+        updateScoreAndDayLimit(deckId);
         return flashcardRepository.findAllByFlashcardDeck_Id(deckId, pageable);
+    }
+
+    private void updateScoreAndDayLimit(Long deckId) {
+        FlashcardDeck tempDeck = this.findById(deckId);
+
+        List<Flashcard> tempFlashcards = flashcardRepository.findAllByFlashcardDeck_Id(deckId);
+        LocalDate today = LocalDate.now();
+        LocalDate lastUpdatedDateDeck = tempDeck.getLastUpdated().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        //Check if its not the same day
+        if(today.getDayOfYear() != lastUpdatedDateDeck.getDayOfYear()){
+            tempDeck.setReviewedToday(0L);
+        }
+        this.save(tempDeck);
+
+        for (Flashcard f:
+                tempFlashcards) {
+            LocalDate lastUpdatedDateFlashcard = f
+                    .getLastUpdated()
+                    .toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
+            //Check if more than 3 day passed
+            if(today.isAfter(lastUpdatedDateFlashcard.plusDays(3))){
+                if(f.getScore()+f.getPreviousScore()>2){
+                    f.setScore(0);
+                    f.setPreviousScore(0);
+                }
+            //Check if more than 1 day passed
+            }else if(today.isAfter(lastUpdatedDateFlashcard.plusDays(1))){
+                if(f.getScore()+f.getPreviousScore()>2){
+                    f.setScore(1);
+                    f.setPreviousScore(1);
+                }
+            }
+            flashcardRepository.save(f);
+        }
+
+    }
+
+    @Override
+    public FlashcardDeck changeDayLimit(Long deckId, Long dayLimit) {
+        FlashcardDeck deck = this.findById(deckId);
+        deck.setDayLimit(dayLimit);
+        this.save(deck);
+        return deck;
     }
 
     @Override

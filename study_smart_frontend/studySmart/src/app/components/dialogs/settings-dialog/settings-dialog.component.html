@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="input">
+        <span class="text">Daily Goal </span>
+        <input type="number" #input min="1" max="1000" [value]="data.dayLimit">
+        <div class="buttons">
+            <div class="cancel" (click)="closeDialog(-1)">Cancel</div>
+            <div class="yes" (click)="closeDialog(input.value)">
+                Edit
+            </div>
+        </div>
+    </div>
