@@ -1,8 +1,3 @@
-<mat-progress-bar [value]="progressBarValue">
-</mat-progress-bar>
-
-
-
 <div class="main-container" *ngIf="currentFlashcardId!==-1">
     <div class="completion-section" *ngIf="goalCompleted">
         <div class="info">Daily Goal Completed!</div>
@@ -23,6 +18,8 @@
         <div class="score2 button" (click)="addScore(2)">Good</div>
         <div class="score3 button" (click)="addScore(3)">Easy</div>
     </div>
+    <mat-progress-bar [value]="progressBarValue">
+    </mat-progress-bar>
 </div>
 <div class="main-container" *ngIf="currentFlashcardId===-1">
     <div class="content">

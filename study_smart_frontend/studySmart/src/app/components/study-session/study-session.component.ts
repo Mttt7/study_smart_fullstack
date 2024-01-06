@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FlashcardDeckService } from '../../services/flashcard-deck.service';
 import { Flashcard } from '../../models/Flashcard';
 import { SubdeckService } from '../../services/subdeck.service';
@@ -36,6 +36,23 @@ export class StudySessionComponent {
   ngOnInit(): void {
     this.updateSubdeck();
   }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === ' ') { this.showBack(); }
+    if (event.key === 'Escape') { this.router.navigate([`/decks/${this.deckId}`]); }
+
+    if (this.backShown) {
+      if (event.key === '1') { this.addScore(0); }
+      if (event.key === '2') { this.addScore(1); }
+      if (event.key === '3') { this.addScore(2); }
+      if (event.key === '4') { this.addScore(3); }
+    }
+
+
+
+  }
+
 
   updateSubdeck() {
     this.deckId = Number(this.route.snapshot.params["id"]);
