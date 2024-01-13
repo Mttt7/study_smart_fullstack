@@ -24,7 +24,4 @@ public interface FlashcardService {
     Flashcard addScore(Long id, int score);
 
     public Flashcard findPristineFlashcardFromDeckId(Long deckId);
-
-
-
 }

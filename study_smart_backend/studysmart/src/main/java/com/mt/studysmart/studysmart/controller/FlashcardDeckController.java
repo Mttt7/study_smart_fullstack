@@ -73,10 +73,7 @@ public class FlashcardDeckController {
         return currentSubdeckService.getCurrentSubdeck(deckId);
     }
 
-    @PatchMapping("/{deckId}/resetScore")
-    List<Flashcard> resetScore(@PathVariable Long deckId, @RequestParam String type){
-        return this.flashcardDeckService.resetScore(deckId,type);
-    }
+
 
 
 }

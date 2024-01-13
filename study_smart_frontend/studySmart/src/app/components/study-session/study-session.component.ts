@@ -39,21 +39,18 @@ export class StudySessionComponent {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (this.currentFlashcardId === -1) {
-      if (event.key === ' ') { this.router.navigate([`/deck/${this.deckId}`]); }
-      if (event.key === 'Escape') { this.router.navigate([`/deck/${this.deckId}`]); }
-    }
-    else {
-      if (event.key === ' ') { this.showBack(); }
-      if (event.key === 'Escape') { this.router.navigate([`/deck/${this.deckId}`]); }
+    if (event.key === ' ') { this.showBack(); }
+    if (event.key === 'Escape') { this.router.navigate([`/decks/${this.deckId}`]); }
 
-      if (this.backShown) {
-        if (event.key === '1') { this.addScore(0); }
-        if (event.key === '2') { this.addScore(1); }
-        if (event.key === '3') { this.addScore(2); }
-        if (event.key === '4') { this.addScore(3); }
-      }
+    if (this.backShown) {
+      if (event.key === '1') { this.addScore(0); }
+      if (event.key === '2') { this.addScore(1); }
+      if (event.key === '3') { this.addScore(2); }
+      if (event.key === '4') { this.addScore(3); }
     }
+
+
+
   }
 
 

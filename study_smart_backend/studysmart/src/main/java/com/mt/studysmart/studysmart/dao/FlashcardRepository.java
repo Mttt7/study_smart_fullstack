@@ -11,8 +11,6 @@ public interface FlashcardRepository extends JpaRepository<Flashcard,Long> {
 
     List<Flashcard> findAllByFlashcardDeck_Id(Long id);
 
-    List<Flashcard> findAllByFlashcardDeck_IdAndAndStatus(Long id,int status);
-
     Page<Flashcard> findAllByFlashcardDeck_Id(Long id, Pageable pageable);
 
     List<Flashcard> findAllByCurrentSubdeck_IdAndCurrentSubdeckNotNull(Long id);

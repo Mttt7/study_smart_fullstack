@@ -17,8 +17,6 @@ public interface FlashcardDeckService {
 
     List<Flashcard> findFlashcardsByDeckId(Long id);
 
-    List<Flashcard> findGreenFlashcardsByDeckId(Long id);
-
     Flashcard addFlashcardToDeck(Long id, AddFlashcardPayload flashcardPayload);
 
     FlashcardDeck createFlashcardDeck(FlashcardDeckCreateDto flashcardDeckCreateDto);
@@ -32,5 +30,4 @@ public interface FlashcardDeckService {
 
     FlashcardDeck changeDayLimit(Long deckId, Long dayLimit);
 
-    List<Flashcard> resetScore(Long deckId,String type);
 }

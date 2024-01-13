@@ -13,11 +13,6 @@
                 Flashcards</button>
         </div>
 
-        <div class="reset-buttons">
-            <button type="button" class="btn btn-success" (click)="resetScore('green')">Reset Green</button>
-            <button type="button" class="btn btn-secondary" (click)="resetScore('all')">Reset All</button>
-        </div>
-
     </div>
     <div class="info">
         <div>🔵-no reviews yet 🔴- very hard 🟠-hard 🟡-almost learnt 🟢-learnt</div>
@@ -31,7 +26,7 @@
                     <th class="text-center">Front</th>
                     <th class="text-center">Back</th>
                     <th class="text-center">Status</th>
-                    <th class="text-center">Created</th>
+                    <th class="text-center">Last Review</th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,14 +34,10 @@
             <tbody>
                 <tr *ngFor="let flashcard of flashcards">
 
-                    <td class="hover text-center" (click)="editFlashcard(flashcard)">{{flashcard.frontContent |
-                        slice:0:30}}</td>
-                    <td class="hover text-center" (click)="editFlashcard(flashcard)">{{flashcard.backContent |
-                        slice:0:30}}</td>
-                    <td class="hover text-center" (click)="editFlashcard(flashcard)">{{getStatusOfFlashcard(flashcard)}}
-                    </td>
-                    <td class="hover text-center" (click)="editFlashcard(flashcard)">
-                        {{flashcard.dateCreated | date: "dd MMM yyyy"}}</td>
+                    <td class="hover text-center" routerLink="">{{flashcard.frontContent | slice:0:30}}</td>
+                    <td class="hover text-center" routerLink="">{{flashcard.backContent | slice:0:30}}</td>
+                    <td class="hover text-center" routerLink="">{{getStatusOfFlashcard(flashcard)}}</td>
+                    <td class="hover text-center" routerLink="">{{flashcard.lastUpdated | date: "dd MMM yyyy"}}</td>
 
 
                     <td>
@@ -55,7 +46,7 @@
                             Actions
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" (click)="editFlashcard(flashcard)">Edit</a></li>
+                            <li><a class="dropdown-item" (click)="editFlashcard(flashcard)">Rename</a></li>
                             <li><a class="dropdown-item" (click)="deleteFlashcard(flashcard)">Delete</a></li>
                         </ul>
                     </td>
