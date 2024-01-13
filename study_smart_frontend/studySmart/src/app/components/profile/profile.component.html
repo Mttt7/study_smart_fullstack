@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="box" *ngIf="isAuthenticated && userFullName">
+
+        <div class="info">
+            <div class="name">{{userFullName}}</div>
+            <div class="email">{{userEmail}}</div>
+        </div>
+
+
+
+        <div class="stats">
+            <div class="decks stat-box">
+                <div class="number">27</div>
+                <div class="label">decks</div>
+            </div>
+            <div class="flashcards stat-box">
+                <div class="number">227</div>
+                <div class="label">flashcards</div>
+            </div>
+        </div>
+
+        <div class="logout-btn" (click)="logout()">LOGOUT</div>
+
+    </div>
+</div>

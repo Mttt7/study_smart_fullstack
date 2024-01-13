@@ -20,6 +20,18 @@ import { AddFlashcardDialogComponent } from './components/dialogs/add-flashcard-
 import { EditFlashcardComponent } from './components/dialogs/edit-flashcard/edit-flashcard.component';
 import { StudySessionComponent } from './components/study-session/study-session.component';
 import { SettingsDialogComponent } from './components/dialogs/settings-dialog/settings-dialog.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+import appConfig from '../config/app-config';
+import OktaAuth from '@okta/okta-auth-js';
+import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
+import { ProfileComponent } from './components/profile/profile.component';
+
+
+const oktaConfig = appConfig.oidc;
+
+const oktaAuth = new OktaAuth(oktaConfig);
+
 
 
 @NgModule({
@@ -33,7 +45,10 @@ import { SettingsDialogComponent } from './components/dialogs/settings-dialog/se
     AddFlashcardDialogComponent,
     EditFlashcardComponent,
     StudySessionComponent,
-    SettingsDialogComponent
+    SettingsDialogComponent,
+    LoginComponent,
+    LoginStatusComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +59,10 @@ import { SettingsDialogComponent } from './components/dialogs/settings-dialog/se
     MatDialogModule,
     MatPaginatorModule,
     MatProgressBarModule,
-    FormsModule
+    FormsModule,
+    OktaAuthModule
   ],
-  providers: [],
+  providers: [{ provide: OKTA_CONFIG, useValue: { oktaAuth } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

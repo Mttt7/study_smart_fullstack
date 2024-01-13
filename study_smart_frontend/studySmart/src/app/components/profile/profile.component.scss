@@ -1,0 +1,96 @@
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    font-family: "Salsa", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+
+    background: rgb(40, 182, 255);
+    background: linear-gradient(40deg, rgba(40, 182, 255, 1) 2%, rgba(204, 0, 255, 1) 100%);
+
+    border-radius: 80% 20% 30% 68% / 58% 22% 78% 42%;
+
+
+    height: 400px;
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+
+    .name {
+        color: white;
+        font-size: 1.5rem;
+
+    }
+
+    .email {
+        font-size: 1.1rem;
+        font-style: italic;
+    }
+}
+
+.stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .stat-box {
+        border-radius: 10px;
+        height: 50px;
+        width: 60px;
+
+
+
+        display: flex;
+        flex-direction: column;
+        font-size: 0.8rem;
+        align-items: center;
+        justify-content: center;
+
+        //background-color: rgb(255, 166, 0);
+        color: white;
+    }
+
+    .number {
+        font-family: "Rubik Scribble", system-ui;
+        font-size: 2rem;
+    }
+
+    .label {
+        font-size: 1rem;
+        margin-top: auto;
+    }
+
+
+}
+
+.logout-btn {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Rubik Scribble", system-ui;
+    color: white;
+}
+
+.logout-btn:hover {
+    cursor: pointer;
+    color: rgb(255, 0, 0);
+}
