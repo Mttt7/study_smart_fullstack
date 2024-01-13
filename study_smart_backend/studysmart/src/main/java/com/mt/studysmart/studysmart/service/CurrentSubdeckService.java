@@ -7,6 +7,4 @@ public interface CurrentSubdeckService {
     CurrentSubdeck getCurrentSubdeck(Long deckId);
 
     void updateSubdeck(CurrentSubdeck currentSubdeck, FlashcardDeck flashcardDeck);
-   //void addNewFlashcardToSubdeck(CurrentSubdeck currentSubdeck);
-
 }

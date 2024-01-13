@@ -9,7 +9,6 @@ public class FlashcardDeckCreateDto {
     private Long userProfileId;
     private String name;
     private Long dayLimit;
-
     @Override
     public String toString() {
         return "FlashcardDeckCreateDto{" +

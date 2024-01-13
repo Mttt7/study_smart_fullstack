@@ -42,7 +42,6 @@ public class Flashcard {
     @JsonIgnore
     private FlashcardDeck flashcardDeck;
 
-
     @ManyToOne
     @JoinColumn(name = "subdeck_id")
     private CurrentSubdeck currentSubdeck;

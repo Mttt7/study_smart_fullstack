@@ -67,7 +67,7 @@ public class FlashcardServiceImpl implements FlashcardService {
     }
 
     @Override
-    public List<Flashcard> findBySubdeckId(Long id) {//albow czensije sprawdzac czy nie null?? nw
+    public List<Flashcard> findBySubdeckId(Long id) {
         List<Flashcard> tempFlashcards = flashcardRepository.findAllByCurrentSubdeck_IdAndCurrentSubdeckNotNull(id);
 
         return tempFlashcards;
@@ -115,7 +115,6 @@ public class FlashcardServiceImpl implements FlashcardService {
         }
         Long flashcardsReviewedSoFarCount = flashcard.getFlashcardDeck().getReviewedToday();
         if(flashcardsReviewedSoFarCount==null){
-            System.out.println("LONG NULLLLLEEEEEMMM JEST !!!!!!");
             flashcard.getFlashcardDeck().setReviewedToday(0L);
             flashcardsReviewedSoFarCount = 0L;
         }
@@ -124,14 +123,6 @@ public class FlashcardServiceImpl implements FlashcardService {
         return this.save(flashcard);
 
     }
-
-//    private void updateSubdeck(Flashcard flashcard) {
-//        CurrentSubdeck currentSubdeck = flashcard.getCurrentSubdeck();
-//        flashcard.setStatus(1);
-//        flashcard.setCurrentSubdeck(null);
-//
-//        this.currentSubdeckService.addNewFlashcardToSubdeck(currentSubdeck);
-//    }
 
     public Flashcard findPristineFlashcardFromDeckId(Long deckId){
         Flashcard newFlashcard = this.flashcardRepository.findFirstByFlashcardDeck_IdAndStatus(deckId,-1);

@@ -26,7 +26,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FlashcardDeckServiceImpl implements FlashcardDeckService {
 
-    private final FlashcardRepository flashcardRepository; //zmieni na serwis!!!!!
+    private final FlashcardRepository flashcardRepository;
     private final FlashcardDeckRepository flashcardDeckRepository;
     private final UserProfileService userProfileService;
 
@@ -53,31 +53,7 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
 
     @Override
     public List<Flashcard> findFlashcardsByDeckId(Long id) {
-//        List<Flashcard> tempFlashcards = flashcardRepository.findAllByFlashcardDeck_Id(id);
-//        LocalDate today = LocalDate.now();
-//        for (Flashcard f:
-//             tempFlashcards) {
-//            LocalDate lastUpdatedDate = f.getLastUpdated().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//
-//            //Check if more than 1 day passed
-//            if(today.isAfter(lastUpdatedDate.plusDays(1))){
-//                if(f.getScore()+f.getPreviousScore()>2){
-//                    f.setScore(1);
-//                    f.setPreviousScore(1);
-//                }
-//                //Check if more than 3 day passed
-//            }else if(today.isAfter(lastUpdatedDate.plusDays(3))){
-//                if(f.getScore()+f.getPreviousScore()>2){
-//                    f.setScore(0);
-//                    f.setPreviousScore(0);
-//                }
-//            }
-//
-//            if(f.getStatus())
-//
-//
-//            flashcardRepository.save(f);
-//        }
+
         return flashcardRepository.findAllByFlashcardDeck_Id(id);
     }
 

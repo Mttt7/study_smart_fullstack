@@ -22,6 +22,6 @@ public class CurrentSubdeck {
 
     @OneToOne
     @JoinColumn(name = "deck_id", referencedColumnName = "id")
-    @JsonIgnore //??????????????????????? zmienic moze
+    @JsonIgnore
     private FlashcardDeck flashcardDeck;
 }

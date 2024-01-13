@@ -30,7 +30,6 @@ public class FlashcardDeckController {
     FlashcardDeck getFlashcardDeckById(@PathVariable Long deckId){
         return this.flashcardDeckService.findById(deckId);
     }
-    //@PostMapping("/{deckId}/")
 
     @PatchMapping("/{deckId}/changeDayLimit")
     FlashcardDeck changeDayLimit(@PathVariable Long deckId, @RequestParam Long dayLimit){

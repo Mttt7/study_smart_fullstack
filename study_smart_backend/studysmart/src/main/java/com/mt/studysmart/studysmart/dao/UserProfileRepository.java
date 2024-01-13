@@ -10,8 +10,4 @@ import java.util.List;
 
 public interface UserProfileRepository extends JpaRepository<UserProfile,Long> {
     Page<FlashcardDeck> findById(Long id, Pageable pageable);
-
-
-
-    //UserProfile findByEmail(String email);
 }

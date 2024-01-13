@@ -29,7 +29,6 @@ public class FlashcardController {
 
     @PutMapping
     Flashcard updateFlashcard(@RequestBody FlashcardUpdateDto flashcardUpdateDto){
-
         return this.flashcardService.updateFlashcard(flashcardUpdateDto);
     }
 

@@ -10,5 +10,4 @@ public class FlashcardUpdateDto {
     private String frontContent;
     private String backContent;
     private Long deckId;
-
 }

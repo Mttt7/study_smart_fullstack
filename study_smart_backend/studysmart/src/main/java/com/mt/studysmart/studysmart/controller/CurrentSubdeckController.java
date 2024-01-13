@@ -23,7 +23,6 @@ public class CurrentSubdeckController {
 
     @GetMapping("/{subdeckId}/flashcards")
     List<Flashcard> getFlashcardsBySubdeckId(@PathVariable Long subdeckId){
-
         return this.flashcardService.findBySubdeckId(subdeckId);
     }
 

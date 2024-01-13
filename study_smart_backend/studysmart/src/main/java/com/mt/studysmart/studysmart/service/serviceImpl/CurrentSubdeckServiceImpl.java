@@ -48,16 +48,6 @@ public class CurrentSubdeckServiceImpl implements CurrentSubdeckService {
     }
 
 
-//    public void addNewFlashcardToSubdeck(CurrentSubdeck currentSubdeck) {
-//        Flashcard flashcard = this.flashcardService.findPristineFlashcard();
-//        if (flashcard != null) {
-//            flashcard.setCurrentSubdeck(currentSubdeck);
-//            flashcard.setStatus(0);
-//        }
-//        this.flashcardService.save(flashcard);
-//    }
-
-
     public void updateSubdeck(CurrentSubdeck currentSubdeck, FlashcardDeck flashcardDeck) {
         System.out.println("=====CURRENT SUBDECK: "+ currentSubdeck);
         int subdeckSize = currentSubdeck.getSize();
@@ -84,32 +74,3 @@ public class CurrentSubdeckServiceImpl implements CurrentSubdeckService {
         }
     }
 }
-
-
-
-
-
-
-
-
-//        Long flashcardDeckSize = flashcardService.countByFlashcardDeckId(flashcardDeck.getId());
-//        if(currentSubdeck.getSize()>=flashcardDeckSize){
-//            List<Flashcard> tempFlashcards =  flashcardService.findAllByFlashcardDeck_Id(flashcardDeck.getId());
-//            tempFlashcards.forEach(flashcard -> {
-//                flashcard.setCurrentSubdeck(currentSubdeck);
-//                flashcard.setStatus(0);
-//                flashcardService.save(flashcard);
-//            });
-//        }else{
-//            int size = currentSubdeck.getSize();
-//            List<Flashcard> tempFlashcards = flashcardService.populateSubdeck(size,flashcardDeck.getId());
-//
-//            tempFlashcards.forEach(flashcard ->{
-//
-//                    flashcard.setCurrentSubdeck(currentSubdeck);
-//                    flashcard.setStatus(0);
-//                    flashcardService.save(flashcard);
-//            });
-////        }
-//    }
-//}

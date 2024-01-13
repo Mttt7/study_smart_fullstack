@@ -12,7 +12,6 @@ public interface UserProfileService {
    List<FlashcardDeck> getDecksByUserId(Long id);
 
     UserProfile getUserProfileById(Long id);
-
     Page<FlashcardDeck> getDecksByUserIdWithPagination(Long id, Pageable pageable);
 
 }
