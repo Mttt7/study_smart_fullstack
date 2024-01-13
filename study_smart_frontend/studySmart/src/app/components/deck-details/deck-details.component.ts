@@ -21,6 +21,7 @@ export class DeckDetailsComponent {
 
 
 
+
   pageSize: number = 5;
   deckId: number = -1;
   flashcards: Flashcard[] = [];
@@ -156,5 +157,22 @@ export class DeckDetailsComponent {
         )
       }
     )
+  }
+
+  resetScore(type: string) {
+    if (type === 'all') {
+      this.flashcardDeckService.resetScore(this.deckId, type).subscribe(
+        () => {
+          this.getFlashcardsList(this.deckId);
+        }
+      )
+    }
+    else if (type === 'green') {
+      this.flashcardDeckService.resetScore(this.deckId, type).subscribe(
+        () => {
+          this.getFlashcardsList(this.deckId);
+        }
+      )
+    }
   }
 }

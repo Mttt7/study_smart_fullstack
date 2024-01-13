@@ -71,6 +71,10 @@ export class FlashcardDeckService {
     return this.httpClient.patch<FlashcardDeck>(`${this.decksUrl}/${deckId}/changeDayLimit?dayLimit=${dayLimit}`, null)
   }
 
+  resetScore(deckId: number, type: string): Observable<Flashcard[]> {
+    return this.httpClient.patch<Flashcard[]>(`${this.decksUrl}/${deckId}/resetScore?type=${type}`, null)
+  }
+
 }
 
 interface CreateDeckPayload {

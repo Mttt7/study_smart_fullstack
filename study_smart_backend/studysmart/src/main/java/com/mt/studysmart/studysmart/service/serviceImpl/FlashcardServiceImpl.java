@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Lazy))
@@ -126,9 +127,10 @@ public class FlashcardServiceImpl implements FlashcardService {
 
     public Flashcard findPristineFlashcardFromDeckId(Long deckId){
         Flashcard newFlashcard = this.flashcardRepository.findFirstByFlashcardDeck_IdAndStatus(deckId,-1);
-        System.out.println("find pristine:"+newFlashcard);
         return newFlashcard;
     }
+
+
 
 
 }
