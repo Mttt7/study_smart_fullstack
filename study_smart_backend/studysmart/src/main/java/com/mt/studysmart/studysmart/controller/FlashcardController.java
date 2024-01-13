@@ -36,4 +36,6 @@ public class FlashcardController {
     Flashcard addScore(@PathVariable Long id, @RequestParam int score){
         return flashcardService.addScore(id,score);
     }
+
+
 }

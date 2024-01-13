@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -55,6 +56,11 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
     public List<Flashcard> findFlashcardsByDeckId(Long id) {
 
         return flashcardRepository.findAllByFlashcardDeck_Id(id);
+    }
+
+    @Override
+    public List<Flashcard> findGreenFlashcardsByDeckId(Long id) {
+        return flashcardRepository.findAllByFlashcardDeck_IdAndAndStatus(id,1);
     }
 
     @Override
@@ -150,6 +156,36 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         FlashcardDeck flashcardDeck = this.findById(deckId);
         flashcardDeck.setName(name.getName());
         return flashcardDeckRepository.save(flashcardDeck);
+    }
+
+    @Override
+    public List<Flashcard> resetScore(Long deckId,String type) {
+
+        if(Objects.equals(type, "all")){
+            List<Flashcard> tempFlashcards= this.findFlashcardsByDeckId(deckId);
+            for (Flashcard f:
+                    tempFlashcards) {
+                f.setPreviousScore(0);
+                f.setScore(0);
+                f.setStatus(-1);
+                f.setCurrentSubdeck(null);
+                this.flashcardRepository.save(f);
+            }
+            return tempFlashcards;
+        }
+        else if(Objects.equals(type, "green")){
+            List<Flashcard> tempFlashcards= this.findGreenFlashcardsByDeckId(deckId);
+            for (Flashcard f:
+                    tempFlashcards) {
+                f.setPreviousScore(0);
+                f.setScore(0);
+                f.setStatus(-1);
+                f.setCurrentSubdeck(null);
+                this.flashcardRepository.save(f);
+            }
+            return tempFlashcards;
+        }
+        return null;
     }
 
 
