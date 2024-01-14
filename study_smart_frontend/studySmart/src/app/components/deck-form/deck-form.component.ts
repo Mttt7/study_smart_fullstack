@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlashcardDeckService } from '../../services/flashcard-deck.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-deck-form',
@@ -14,7 +15,7 @@ export class DeckFormComponent {
   myForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private flashcardDeckService: FlashcardDeckService, private _snackBar: MatSnackBar) { }
+    private flashcardDeckService: FlashcardDeckService, private _snackBar: MatSnackBar, private userService: UserService) { }
 
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
@@ -37,7 +38,11 @@ export class DeckFormComponent {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     })
-    this.flashcardDeckService.createDeck(this.name?.value, this.dayLimit?.value).subscribe()
+    this.userService.getUserId().subscribe(
+      (userId) => {
+        this.flashcardDeckService.createDeck(this.name?.value, this.dayLimit?.value, userId).subscribe()
+      })
+
   }
 
 

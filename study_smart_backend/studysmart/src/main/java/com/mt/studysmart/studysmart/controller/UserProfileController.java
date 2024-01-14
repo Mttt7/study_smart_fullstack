@@ -23,6 +23,10 @@ public class UserProfileController {
     public UserProfileController(UserProfileService userProfileService) {
         this.userProfileService = userProfileService;
     }
+    @GetMapping("/oktaId/{oktaId}")
+    public Long getIdByOktaId(@PathVariable String oktaId){
+        return this.userProfileService.getIdByOktaId(oktaId);
+    }
 
     @GetMapping("/{id}")
     public UserProfile getUserProfileById(@PathVariable Long id){

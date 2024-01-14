@@ -26,6 +26,7 @@ import appConfig from '../config/app-config';
 import OktaAuth from '@okta/okta-auth-js';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 const oktaConfig = appConfig.oidc;
@@ -48,7 +49,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     SettingsDialogComponent,
     LoginComponent,
     LoginStatusComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

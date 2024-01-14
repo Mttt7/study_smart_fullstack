@@ -7,6 +7,7 @@ import { FlashcardsPaginatedResponse } from '../models/FlashcardsPaginatedRespon
 import { FlashcardDecksPaginatedResponse } from '../models/FlashcardDecksPaginatedResponse';
 import { FlashcardPayload } from '../models/FlashcardPayload';
 import { SubdeckResponse } from '../models/SubdeckResponse';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,28 +21,23 @@ export class FlashcardDeckService {
   private decksUrl = 'http://localhost:5000/api/decks';
   private usersUrl = 'http://localhost:5000/api/profiles';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, userService: UserService) { }
 
   getDeckById(id: number): Observable<FlashcardDeck> {
     return this.httpClient.get<FlashcardDeck>(`${this.decksUrl}/${id}`)
   }
 
+
   getDeckListByUserId(userId: number): Observable<FlashcardDeck[]> {
-    //1 now is hardcoded
-    //get userId from userSService
-    return this.httpClient.get<FlashcardDeck[]>(`${this.usersUrl}/1/decks`)
+    return this.httpClient.get<FlashcardDeck[]>(`${this.usersUrl}/${userId}/decks`)
   }
 
   getDeckListByUserIdPaginate(userId: number, pageNumber: number, pageSize: number): Observable<FlashcardDecksPaginatedResponse> {
-    //1 now is hardcoded
-    //get userId from userSService
-    return this.httpClient.get<FlashcardDecksPaginatedResponse>(`${this.usersUrl}/1/decks/paginated?page=${pageNumber}&size=${pageSize}`)
+    return this.httpClient.get<FlashcardDecksPaginatedResponse>(`${this.usersUrl}/${userId}/decks/paginated?page=${pageNumber}&size=${pageSize}`)
   }
 
-  createDeck(name: String, dayLimit: number): Observable<FlashcardDeck> {
-    //1 now is hardcoded
-    //get userId from userSService
-    let createDeckPayload = { userProfileId: 1, name: name, dayLimit: dayLimit } as CreateDeckPayload
+  createDeck(name: String, dayLimit: number, userId: number): Observable<FlashcardDeck> {
+    let createDeckPayload = { userProfileId: userId, name: name, dayLimit: dayLimit } as CreateDeckPayload
 
     return this.httpClient.post<FlashcardDeck>(`${this.decksUrl}/`, createDeckPayload)
   }

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FlashcardDecksPaginatedResponse } from '../../models/FlashcardDecksPaginatedResponse';
 import { PageEvent } from '@angular/material/paginator';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-decks-list',
@@ -18,24 +19,30 @@ export class DecksListComponent {
   pageSize: number = 5;
   currentPage: number = 0;
   length: number = 0
-
+  loading = true;
   decks: FlashcardDeck[] = [];
 
   constructor(private flashcardDeckService: FlashcardDeckService,
     private dialogService: DialogService, private _snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.getDeckList(this.userId);
+    this.userService.getUserId().subscribe(
+      (data) => {
+        this.userId = data;
+        this.getDeckList(this.userId);
+      }
+    )
   }
 
   getDeckList(userId: number) {
-    this.flashcardDeckService.getDeckListByUserIdPaginate(1,
+    this.flashcardDeckService.getDeckListByUserIdPaginate(userId,
       this.currentPage,
       this.pageSize).subscribe(this.proccessResult())
   }
   proccessResult() {
     return (data: FlashcardDecksPaginatedResponse) => {
+      this.loading = false;
       this.decks = data.content as FlashcardDeck[];
       this.length = data.totalElements;
     }

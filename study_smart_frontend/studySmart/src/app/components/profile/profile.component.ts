@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth from '@okta/okta-auth-js';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,10 @@ export class ProfileComponent {
   isAuthenticated: boolean = false;
   userFullName: string = '';
   userEmail: string = '';
+  id: string = '';
 
   constructor(private oktaAuthService: OktaAuthStateService,
-    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
+    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth, private userService: UserService) { }
 
   ngOnInit(): void {
     //Subscribe to authentication state changes
@@ -31,13 +33,13 @@ export class ProfileComponent {
         (res) => {
           this.userFullName = res.name as string;
           this.userEmail = res.email as string;
-
+          this.id = res.sub as string;
         }
       )
     }
   }
 
   logout() {
-    this.oktaAuth.signOut();
+    this.userService.logout();
   }
 }

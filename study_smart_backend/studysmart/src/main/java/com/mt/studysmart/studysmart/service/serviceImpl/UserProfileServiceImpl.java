@@ -31,4 +31,16 @@ public class UserProfileServiceImpl implements UserProfileService {
     public Page<FlashcardDeck> getDecksByUserIdWithPagination(Long id, Pageable pageable) {
         return flashcardDeckRepository.findAllByUserProfile_IdOrderByLastUpdatedDesc(id, pageable);
     }
+
+    @Override
+    public Long getIdByOktaId(String oktaId) {
+        UserProfile userProfile =  userProfileRepository.findByOktaId(oktaId);
+        if(userProfile == null){
+            userProfile = new UserProfile();
+            userProfile.setOktaId(oktaId);
+            userProfileRepository.save(userProfile);
+        }
+        return userProfile.getId();
+
+    }
 }

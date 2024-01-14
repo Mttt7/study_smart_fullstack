@@ -14,4 +14,6 @@ public interface UserProfileService {
     UserProfile getUserProfileById(Long id);
     Page<FlashcardDeck> getDecksByUserIdWithPagination(Long id, Pageable pageable);
 
+    Long getIdByOktaId(String oktaId);
 }
+

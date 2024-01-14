@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth from '@okta/okta-auth-js';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login-status',
@@ -15,7 +16,7 @@ export class LoginStatusComponent {
   userFullName: string = '';
 
   constructor(private oktaAuthService: OktaAuthStateService,
-    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
+    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth, private userService: UserService) { }
 
   ngOnInit(): void {
     //Subscribe to authentication state changes
@@ -40,8 +41,7 @@ export class LoginStatusComponent {
   }
 
   logout() {
-    //Terminates the session with Okta and removes current tokens.
-    this.oktaAuth.signOut();
+    this.userService.logout();
   }
 
 }

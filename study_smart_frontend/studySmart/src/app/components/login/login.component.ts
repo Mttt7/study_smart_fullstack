@@ -3,6 +3,7 @@ import appConfig from '../../../config/app-config';
 import { OKTA_AUTH } from '@okta/okta-angular';
 import OktaAuth from '@okta/okta-auth-js';
 import OktaSignIn from '@okta/okta-signin-widget';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent {
   oktaSignin: any;
 
 
-  constructor(@Inject(OKTA_AUTH) private oktaAuth: OktaAuth) {
+  constructor(@Inject(OKTA_AUTH) private oktaAuth: OktaAuth, private userService: UserService) {
     this.oktaSignin = new OktaSignIn({
       logo: 'assets/images/logo.png',
       features: { registration: true },
@@ -35,10 +36,8 @@ export class LoginComponent {
     this.oktaSignin.remove();
     this.oktaSignin.renderEl({
       el: '#okta-sign-in-widget'
-    }, //name has to match the id in the html
-
+    },
       (response: any) => {
-
         if (response.status === 'SUCCESS') {
           this.oktaAuth.signInWithRedirect();
         }
