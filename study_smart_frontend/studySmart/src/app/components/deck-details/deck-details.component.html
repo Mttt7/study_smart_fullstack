@@ -1,4 +1,9 @@
-<div style="padding-left: 5rem; padding-right: 5rem;padding-top: 2rem;">
+<div class="unauthorized" *ngIf="unauthorized">
+    <div>That's not your deck!</div>
+</div>
+
+
+<div style="padding-left: 5rem; padding-right: 5rem;padding-top: 2rem;" *ngIf="!unauthorized">
     <div class="buttons">
         <div class="start-button">
             <button type="button" class="btn btn-primary start-btn" [routerLink]="['./session']">Start</button>

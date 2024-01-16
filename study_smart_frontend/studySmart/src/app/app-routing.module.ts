@@ -30,6 +30,11 @@ const routes: Routes = [
     path: 'deck/:id', component: DeckDetailsComponent, canActivate: [OktaAuthGuard],
     data: { onAuthRequired: sendToLoginPage }
   },
+
+  {
+    path: 'deck/:id/:error', component: DeckDetailsComponent, canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: sendToLoginPage }
+  },
   {
     path: 'deck/:id/session', component: StudySessionComponent, canActivate: [OktaAuthGuard],
     data: { onAuthRequired: sendToLoginPage }

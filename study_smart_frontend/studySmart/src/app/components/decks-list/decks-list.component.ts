@@ -3,7 +3,7 @@ import { FlashcardDeck } from '../../models/FlashcardDeck';
 import { FlashcardDeckService } from '../../services/flashcard-deck.service';
 import { DialogService } from '../../services/dialog.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardDecksPaginatedResponse } from '../../models/FlashcardDecksPaginatedResponse';
 import { PageEvent } from '@angular/material/paginator';
 import { UserService } from '../../services/user.service';
@@ -24,9 +24,10 @@ export class DecksListComponent {
 
   constructor(private flashcardDeckService: FlashcardDeckService,
     private dialogService: DialogService, private _snackBar: MatSnackBar,
-    private router: Router, private userService: UserService) { }
+    private router: Router, private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
     this.userService.getUserId().subscribe(
       (data) => {
         this.userId = data;

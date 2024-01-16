@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DecksListComponent } from './components/decks-list/decks-list.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DeckFormComponent } from './components/deck-form/deck-form.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -27,6 +27,8 @@ import OktaAuth from '@okta/okta-auth-js';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { ErrorInterceptorService } from './services/error-interceptor.service';
 
 
 const oktaConfig = appConfig.oidc;
@@ -64,7 +66,9 @@ const oktaAuth = new OktaAuth(oktaConfig);
     FormsModule,
     OktaAuthModule
   ],
-  providers: [{ provide: OKTA_CONFIG, useValue: { oktaAuth } }],
+  providers: [{ provide: OKTA_CONFIG, useValue: { oktaAuth } },
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

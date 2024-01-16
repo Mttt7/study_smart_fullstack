@@ -8,11 +8,18 @@ import com.mt.studysmart.studysmart.dto.NewNameDto;
 import com.mt.studysmart.studysmart.entity.Flashcard;
 import com.mt.studysmart.studysmart.entity.FlashcardDeck;
 import com.mt.studysmart.studysmart.entity.UserProfile;
+import com.mt.studysmart.studysmart.exception.UnauthorizedException;
+import com.mt.studysmart.studysmart.service.AuthorizationService;
 import com.mt.studysmart.studysmart.service.FlashcardDeckService;
 import com.mt.studysmart.studysmart.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,7 +37,7 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
     private final FlashcardRepository flashcardRepository;
     private final FlashcardDeckRepository flashcardDeckRepository;
     private final UserProfileService userProfileService;
-
+    private final AuthorizationService authorizationService;
 
     @Override
     public void save(FlashcardDeck flashcardDeck) {
@@ -39,6 +46,7 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
 
     @Override
     public FlashcardDeck findById(Long id) {
+
         Optional<FlashcardDeck> result = flashcardDeckRepository.findById(id);
 
         FlashcardDeck theFlashcardDeck = null;
@@ -49,7 +57,12 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
             theFlashcardDeck = null;
         }
 
-        return theFlashcardDeck;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       if(authorizationService.isUserAuthorized(authentication,theFlashcardDeck.getUserProfile().getId())){
+           return theFlashcardDeck;
+       }else{
+           throw new UnauthorizedException("User is not authorized to access this resource");
+       }
     }
 
     @Override

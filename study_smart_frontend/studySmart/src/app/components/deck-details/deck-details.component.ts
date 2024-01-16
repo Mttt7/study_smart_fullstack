@@ -28,7 +28,7 @@ export class DeckDetailsComponent {
   showFlashcards: boolean = false;
   currentPage: number = 0;
   length: number = 0
-
+  unauthorized: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -38,6 +38,13 @@ export class DeckDetailsComponent {
     private flashcardService: FlashcardService) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      console.log(params)
+      const error = params['error'];
+      if (error === 'Unauthorized') {
+        this.unauthorized = true;
+      }
+    });
     this.deckId = Number(this.route.snapshot.params["id"]);
     this.getFlashcardsList(this.deckId);
 
