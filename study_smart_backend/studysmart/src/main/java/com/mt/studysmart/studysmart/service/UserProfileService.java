@@ -22,6 +22,9 @@ public interface UserProfileService {
     int getDecksCountByUserId(Long id);
 
     Long getFlashcardsCountByUserId(Long id);
+
+    Long getReviewedTodayByUserId(Long id);
 }
+
 
 

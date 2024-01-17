@@ -41,7 +41,6 @@ public class FlashcardDeckController {
         return this.flashcardDeckService.findFlashcardsByDeckIdWithPagination(deckId, pageable);
     }
 
-
     @PatchMapping("/{deckId}/changeDayLimit")
     FlashcardDeck changeDayLimit(@PathVariable Long deckId, @RequestParam Long dayLimit){
         return this.flashcardDeckService.changeDayLimit(deckId,dayLimit);
@@ -56,8 +55,6 @@ public class FlashcardDeckController {
     void DeleteFlashcardDeck(@PathVariable Long deckId){
         this.flashcardDeckService.deleteFlashcardDeck(deckId);
     }
-
-
 
     @PostMapping("/")
     FlashcardDeck createFlashcardDeck(@RequestBody FlashcardDeckCreateDto flashcardDeckCreateDto){

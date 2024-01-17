@@ -30,9 +30,6 @@ public class UserProfileController {
         return this.userProfileService.getUserProfileById(id);
     }
 
-
-
-
     @GetMapping("/{id}/decks")
     public List<FlashcardDeck> getDecksByUserId(@PathVariable Long id){
         return this.userProfileService.getDecksByUserId(id);
@@ -40,6 +37,10 @@ public class UserProfileController {
     @GetMapping("/{id}/decks/count")
     public int getDecksCountByUserId(@PathVariable Long id){
         return this.userProfileService.getDecksCountByUserId(id);
+    }
+    @GetMapping("/{id}/flashcards/countReviewedToday")
+    public Long getReviewedTodayByUserId(@PathVariable Long id){
+        return this.userProfileService.getReviewedTodayByUserId(id);
     }
 
     @GetMapping("/{id}/flashcards/count")

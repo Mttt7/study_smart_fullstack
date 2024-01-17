@@ -65,5 +65,16 @@ public class UserProfileServiceImpl implements UserProfileService {
         return flashcardCount;
     }
 
+    @Override
+    public Long getReviewedTodayByUserId(Long id) {
+        List<FlashcardDeck> tempDecks =  this.getDecksByUserId(id);
+        Long reviewedToday = 0L;
+        for (FlashcardDeck f :
+                tempDecks) {
+            reviewedToday = reviewedToday + f.getReviewedToday();
+        }
+        return reviewedToday;
+    }
+
 
 }

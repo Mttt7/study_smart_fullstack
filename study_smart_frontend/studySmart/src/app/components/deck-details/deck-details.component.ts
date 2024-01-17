@@ -17,11 +17,6 @@ import { FlashcardPayload } from '../../models/FlashcardPayload';
 })
 export class DeckDetailsComponent {
 
-
-
-
-
-
   pageSize: number = 5;
   deckId: number = -1;
   flashcards: Flashcard[] = [];

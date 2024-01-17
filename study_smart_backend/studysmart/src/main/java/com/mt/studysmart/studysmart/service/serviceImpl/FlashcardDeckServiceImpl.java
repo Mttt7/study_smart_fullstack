@@ -147,6 +147,7 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         FlashcardDeck flashcardDeck = new FlashcardDeck();
         UserProfile userProfile = userProfileService.getUserProfileById(flashcardDeckCreateDto.getUserProfileId());
         flashcardDeck.setUserProfile(userProfile);
+        flashcardDeck.setReviewedToday(0L);
         flashcardDeck.setName(flashcardDeckCreateDto.getName());
         flashcardDeck.setDayLimit(flashcardDeckCreateDto.getDayLimit());
         flashcardDeck.setFlashcardsCount(0L);

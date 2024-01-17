@@ -22,6 +22,7 @@ export class DecksListComponent {
   loading = true;
   decks: FlashcardDeck[] = [];
   searchMode: boolean = false;
+  reviewedToday: number = 0;
 
   constructor(private flashcardDeckService: FlashcardDeckService,
     private dialogService: DialogService, private _snackBar: MatSnackBar,
@@ -29,6 +30,7 @@ export class DecksListComponent {
 
   ngOnInit(): void {
     this.listDecks()
+
   }
 
   listDecks() {
@@ -37,6 +39,7 @@ export class DecksListComponent {
     this.userService.getUserId().subscribe(
       (data) => {
         this.userId = data;
+        this.countReviewedToday(this.userId)
         if (!this.searchMode) {
           this.getDeckList(this.userId);
         }
@@ -50,6 +53,15 @@ export class DecksListComponent {
 
       }
     )
+  }
+
+  countReviewedToday(id: number): number {
+    this.flashcardDeckService.countReviewedToday(id).subscribe(
+      (count) => {
+        this.reviewedToday = count;
+      }
+    )
+    return 0;
   }
 
 

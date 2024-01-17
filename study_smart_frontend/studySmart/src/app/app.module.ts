@@ -9,10 +9,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DeckFormComponent } from './components/deck-form/deck-form.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ChangeNameDialogComponent } from './components/dialogs/change-name-dialog/change-name-dialog.component';
 import { DeckDetailsComponent } from './components/deck-details/deck-details.component';
@@ -65,6 +67,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     MatDialogModule,
     MatPaginatorModule,
     MatProgressBarModule,
+    MatInputModule,
+    MatButtonModule,
     FormsModule,
     OktaAuthModule
   ],
