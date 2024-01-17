@@ -30,9 +30,21 @@ public class UserProfileController {
         return this.userProfileService.getUserProfileById(id);
     }
 
+
+
+
     @GetMapping("/{id}/decks")
     public List<FlashcardDeck> getDecksByUserId(@PathVariable Long id){
         return this.userProfileService.getDecksByUserId(id);
+    }
+    @GetMapping("/{id}/decks/count")
+    public int getDecksCountByUserId(@PathVariable Long id){
+        return this.userProfileService.getDecksCountByUserId(id);
+    }
+
+    @GetMapping("/{id}/flashcards/count")
+    public Long getFlashcardsCountByUserId(@PathVariable Long id){
+        return this.userProfileService.getFlashcardsCountByUserId(id);
     }
 
     @GetMapping("/{id}/decks/paginated")

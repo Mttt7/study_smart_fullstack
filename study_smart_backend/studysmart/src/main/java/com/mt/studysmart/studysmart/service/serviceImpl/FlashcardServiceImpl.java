@@ -89,6 +89,10 @@ public class FlashcardServiceImpl implements FlashcardService {
     @Override
     @Transactional
     public void removeById(Long id) {
+        FlashcardDeck tempDeck =  this.findById(id).getFlashcardDeck();
+        tempDeck.setFlashcardsCount(tempDeck.getFlashcardsCount()-1);
+        flashcardDeckService.save(tempDeck);
+
        flashcardRepository.removeById(id);
     }
 

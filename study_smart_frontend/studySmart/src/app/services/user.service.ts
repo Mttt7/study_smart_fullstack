@@ -17,14 +17,20 @@ export class UserService {
   ) { }
 
 
-  getUserId(): Observable<number> {
-    return from(this.oktaAuth.getUser()).pipe(
-      mergeMap((res) => {
-        this.oktaId = res.sub as string;
-        return this.httpClient.get<number>(`${this.userUrl}/oktaId/${this.oktaId}`);
-      }),
-      last() // Poczekaj na zakończenie wszystkich operacji i zwróć ostatni wynik
-    );
+  getUserId(_oktaId?: string): Observable<number> {
+
+    if (!_oktaId) {
+      return from(this.oktaAuth.getUser()).pipe(
+        mergeMap((res) => {
+          this.oktaId = res.sub as string;
+          return this.httpClient.get<number>(`${this.userUrl}/oktaId/${this.oktaId}`);
+        }),
+        last() // Poczekaj na zakończenie wszystkich operacji i zwróć ostatni wynik
+      );
+    } else {
+      return this.httpClient.get<number>(`${this.userUrl}/oktaId/${_oktaId}`);
+    }
+
   }
 
   logout() {

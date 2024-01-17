@@ -18,6 +18,10 @@ public interface UserProfileService {
 
 
     Page<FlashcardDeck> searchDecksByUserIdWithPagination(Long id, Pageable pageable, String keyword);
+
+    int getDecksCountByUserId(Long id);
+
+    Long getFlashcardsCountByUserId(Long id);
 }
 
 

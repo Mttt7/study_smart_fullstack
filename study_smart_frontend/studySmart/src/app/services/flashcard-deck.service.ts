@@ -80,6 +80,15 @@ export class FlashcardDeckService {
   }
 
 
+  countUserDecks(userId: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.usersUrl}/${userId}/decks/count`)
+  }
+
+  countUserFlashcards(userId: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.usersUrl}/${userId}/flashcards/count`)
+  }
+
+
 
 }
 

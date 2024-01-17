@@ -37,6 +37,9 @@ public class FlashcardDeck {
     @UpdateTimestamp
     private Date lastUpdated;
 
+    @Column(name="flashcards_count")
+    private Long flashcardsCount;
+
     @ManyToOne
     @JoinColumn(name = "user_profile_id")
     @JsonIgnore

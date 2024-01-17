@@ -49,5 +49,21 @@ public class UserProfileServiceImpl implements UserProfileService {
         return flashcardDeckRepository.findAllByUserProfile_IdAndNameContaining(id,keyword,pageable);
     }
 
+    @Override
+    public int getDecksCountByUserId(Long id) {
+       return flashcardDeckRepository.countByUserProfile_Id(id);
+    }
+
+    @Override
+    public Long getFlashcardsCountByUserId(Long id) {
+       List<FlashcardDeck> tempDecks =  this.getDecksByUserId(id);
+       long flashcardCount = 0L;
+        for (FlashcardDeck f :
+                tempDecks) {
+            flashcardCount = flashcardCount+f.getFlashcardsCount();
+        }
+        return flashcardCount;
+    }
+
 
 }

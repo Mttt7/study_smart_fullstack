@@ -14,4 +14,6 @@ public interface FlashcardDeckRepository extends JpaRepository<FlashcardDeck,Lon
     Page<FlashcardDeck> findAllByUserProfile_IdOrderByLastUpdatedDesc(Long id, Pageable pageable);
 
     Page<FlashcardDeck> findAllByUserProfile_IdAndNameContaining(Long id,@Param("name") String name, Pageable pageable);
+
+    int countByUserProfile_Id(Long id);
 }

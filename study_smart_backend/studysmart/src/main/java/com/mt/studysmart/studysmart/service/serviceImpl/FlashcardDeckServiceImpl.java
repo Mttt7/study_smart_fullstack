@@ -136,6 +136,8 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         FlashcardDeck tempFlashcardDeck = this.findById(id);
         flashcard.setFlashcardDeck(tempFlashcardDeck);
         flashcard.setStatus(-1);
+        tempFlashcardDeck.setFlashcardsCount(tempFlashcardDeck.getFlashcardsCount()+1);
+        flashcardDeckRepository.save(tempFlashcardDeck);
         flashcardRepository.save(flashcard);
         return flashcard;
     }
@@ -147,6 +149,7 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         flashcardDeck.setUserProfile(userProfile);
         flashcardDeck.setName(flashcardDeckCreateDto.getName());
         flashcardDeck.setDayLimit(flashcardDeckCreateDto.getDayLimit());
+        flashcardDeck.setFlashcardsCount(0L);
 
         flashcardDeckRepository.save(flashcardDeck);
 
