@@ -1,0 +1,11 @@
+<div class="form-header" style="display: flex;">
+
+    <input #myInput class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+        (keyup.enter)="doSearch(myInput.value)">
+
+
+    <button (click)="doSearch(myInput.value)" class="btn btn-outline-success" type="submit">
+        Search
+    </button>
+
+</div>

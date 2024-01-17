@@ -3,7 +3,7 @@ import { FlashcardDeck } from '../../models/FlashcardDeck';
 import { FlashcardDeckService } from '../../services/flashcard-deck.service';
 import { DialogService } from '../../services/dialog.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FlashcardDecksPaginatedResponse } from '../../models/FlashcardDecksPaginatedResponse';
 import { PageEvent } from '@angular/material/paginator';
 import { UserService } from '../../services/user.service';
@@ -21,19 +21,41 @@ export class DecksListComponent {
   length: number = 0
   loading = true;
   decks: FlashcardDeck[] = [];
+  searchMode: boolean = false;
 
   constructor(private flashcardDeckService: FlashcardDeckService,
     private dialogService: DialogService, private _snackBar: MatSnackBar,
     private router: Router, private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.listDecks()
+  }
+
+  listDecks() {
+    this.searchMode = this.route.snapshot.paramMap.has('keyword')
 
     this.userService.getUserId().subscribe(
       (data) => {
         this.userId = data;
-        this.getDeckList(this.userId);
+        if (!this.searchMode) {
+          this.getDeckList(this.userId);
+        }
+        else if (this.searchMode) {
+          this.route.params.subscribe(
+            (params: Params) => {
+              this.searchDecks(params['keyword'])
+            }
+          )
+        }
+
       }
     )
+  }
+
+
+  searchDecks(keyword: string) {
+
+    this.flashcardDeckService.searchDecksPaginate(keyword, this.currentPage, this.pageSize, this.userId,).subscribe(this.proccessResult())
   }
 
   getDeckList(userId: number) {

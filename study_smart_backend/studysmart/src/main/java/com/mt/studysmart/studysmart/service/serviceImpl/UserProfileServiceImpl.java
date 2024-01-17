@@ -44,5 +44,10 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     }
 
+    @Override
+    public Page<FlashcardDeck> searchDecksByUserIdWithPagination(Long id, Pageable pageable, String keyword) {
+        return flashcardDeckRepository.findAllByUserProfile_IdAndNameContaining(id,keyword,pageable);
+    }
+
 
 }

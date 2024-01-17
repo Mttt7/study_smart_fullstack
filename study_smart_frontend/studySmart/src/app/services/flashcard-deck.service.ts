@@ -18,6 +18,7 @@ export class FlashcardDeckService {
 
 
 
+
   private decksUrl = 'http://localhost:5000/api/decks';
   private usersUrl = 'http://localhost:5000/api/profiles';
 
@@ -35,6 +36,13 @@ export class FlashcardDeckService {
   getDeckListByUserIdPaginate(userId: number, pageNumber: number, pageSize: number): Observable<FlashcardDecksPaginatedResponse> {
     return this.httpClient.get<FlashcardDecksPaginatedResponse>(`${this.usersUrl}/${userId}/decks/paginated?page=${pageNumber}&size=${pageSize}`)
   }
+
+  searchDecksPaginate(keyword: string, currentPage: number, pageSize: number, userId: number): Observable<FlashcardDecksPaginatedResponse> {
+    "/api/profiles/{id}/decks/paginated/search"
+    return this.httpClient.get<FlashcardDecksPaginatedResponse>(`${this.usersUrl}/${userId}/decks/paginated/search?keyword=${keyword}&page=${currentPage}&size=${pageSize}`)
+  }
+
+
 
   createDeck(name: String, dayLimit: number, userId: number): Observable<FlashcardDeck> {
     let createDeckPayload = { userProfileId: userId, name: name, dayLimit: dayLimit } as CreateDeckPayload
@@ -70,6 +78,8 @@ export class FlashcardDeckService {
   resetScore(deckId: number, type: string): Observable<Flashcard[]> {
     return this.httpClient.patch<Flashcard[]>(`${this.decksUrl}/${deckId}/resetScore?type=${type}`, null)
   }
+
+
 
 }
 

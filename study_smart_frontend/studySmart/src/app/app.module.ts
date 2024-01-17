@@ -29,6 +29,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ErrorInterceptorService } from './services/error-interceptor.service';
+import { SearchComponent } from './search/search.component';
 
 
 const oktaConfig = appConfig.oidc;
@@ -52,7 +53,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     LoginComponent,
     LoginStatusComponent,
     ProfileComponent,
-    LoaderComponent
+    LoaderComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

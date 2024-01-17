@@ -39,7 +39,6 @@ export class DeckDetailsComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      console.log(params)
       const error = params['error'];
       if (error === 'Unauthorized') {
         this.unauthorized = true;

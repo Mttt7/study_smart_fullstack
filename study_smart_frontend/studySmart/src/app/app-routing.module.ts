@@ -32,7 +32,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'deck/:id/:error', component: DeckDetailsComponent, canActivate: [OktaAuthGuard],
+    path: 'deck/:id:error', component: DeckDetailsComponent, canActivate: [OktaAuthGuard],
     data: { onAuthRequired: sendToLoginPage }
   },
   {
@@ -41,6 +41,10 @@ const routes: Routes = [
   },
   {
     path: 'profile', component: ProfileComponent, canActivate: [OktaAuthGuard],
+    data: { onAuthRequired: sendToLoginPage }
+  },
+  {
+    path: 'search/:keyword', component: DecksListComponent, canActivate: [OktaAuthGuard],
     data: { onAuthRequired: sendToLoginPage }
   },
 

@@ -6,10 +6,7 @@ import com.mt.studysmart.studysmart.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +39,12 @@ public class UserProfileController {
     public Page<FlashcardDeck> getDecksByUserIdWithPagination(@PathVariable Long id, Pageable pageable){
         return this.userProfileService.getDecksByUserIdWithPagination(id, pageable);
     }
+
+    @GetMapping("/{id}/decks/paginated/search")
+    public Page<FlashcardDeck> searchDecksByUserIdWithPagination(@PathVariable Long id, Pageable pageable, @RequestParam String keyword){
+        return this.userProfileService.searchDecksByUserIdWithPagination(id, pageable,keyword);
+    }
+
 
 
 
