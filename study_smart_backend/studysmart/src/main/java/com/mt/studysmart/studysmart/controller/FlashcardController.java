@@ -2,20 +2,23 @@ package com.mt.studysmart.studysmart.controller;
 
 import com.mt.studysmart.studysmart.dto.FlashcardUpdateDto;
 import com.mt.studysmart.studysmart.entity.Flashcard;
+import com.mt.studysmart.studysmart.service.CsvExportService;
 import com.mt.studysmart.studysmart.service.FlashcardService;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/flashcards")
 public class FlashcardController {
 
-    private FlashcardService flashcardService;
+    private final FlashcardService flashcardService;
+    private final CsvExportService csvExportService;
 
-    public FlashcardController(FlashcardService flashcardService) {
-        this.flashcardService = flashcardService;
-    }
 
     @GetMapping("/{id}")
     Flashcard getFlashcardById(@PathVariable Long id){
@@ -37,5 +40,11 @@ public class FlashcardController {
         return flashcardService.addScore(id,score);
     }
 
+    @GetMapping("/getCsv/{userId}")
+    void getAllFlashcardsInCsvByUserId(HttpServletResponse servletResponse,@PathVariable Long userId) throws IOException {
+        servletResponse.setContentType("text/csv");
+        servletResponse.addHeader("Content-Disposition","attachment; filename=\"employees.csv\"");
+        csvExportService.writeFlashcardsToCsv(servletResponse.getWriter(),userId);
+    }
 
 }

@@ -3,6 +3,7 @@ import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth from '@okta/okta-auth-js';
 import { UserService } from '../../services/user.service';
 import { FlashcardDeckService } from '../../services/flashcard-deck.service';
+import { FlashcardService } from '../../services/flashcard.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,7 @@ import { FlashcardDeckService } from '../../services/flashcard-deck.service';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
+
 
   isAuthenticated: boolean = false;
   userFullName: string = '';
@@ -19,7 +21,7 @@ export class ProfileComponent {
   decksCount: number = 0;
   flashcardsCount: number = 0;
 
-  constructor(private oktaAuthService: OktaAuthStateService,
+  constructor(private oktaAuthService: OktaAuthStateService, private flashcardService: FlashcardService,
     @Inject(OKTA_AUTH) private oktaAuth: OktaAuth, private userService: UserService, private flashcardDeckService: FlashcardDeckService) { }
 
   ngOnInit(): void {
@@ -64,4 +66,20 @@ export class ProfileComponent {
   logout() {
     this.userService.logout();
   }
+
+  downloadCsv() {
+    this.flashcardService.downloadAllFlashcardsAsCsv(this.id).subscribe((response) => {
+      const contentDisposition = response.headers.get('Content-Disposition');
+      const filename = contentDisposition
+        ? contentDisposition.split(';')[1].trim().split('=')[1]
+        : 'employees.csv';
+
+      const blob = new Blob([response.body as BlobPart], { type: 'text/csv' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+    });
+  }
 }
+

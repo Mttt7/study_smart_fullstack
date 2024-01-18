@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Flashcard } from '../models/Flashcard';
@@ -35,5 +35,18 @@ export class FlashcardService {
   }
 
 
+  downloadAllFlashcardsAsCsv(id: number): Observable<HttpResponse<Blob>> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'text/csv',
+    });
+    return this.httpClient.get(`${this.flashcardsUrl}/getCsv/${id}`, {
+      headers,
+      responseType: 'blob',
+      observe: 'response',
+    });
+
+  }
 
 }
+
+

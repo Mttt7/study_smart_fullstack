@@ -36,8 +36,6 @@ public class FlashcardDeckController {
     }
     @GetMapping("/{deckId}/flashcards/paginated")
     Page<Flashcard> getFlashcardsByDeckIdWithPagination(@PathVariable Long deckId, Pageable pageable){
-
-
         return this.flashcardDeckService.findFlashcardsByDeckIdWithPagination(deckId, pageable);
     }
 
@@ -61,9 +59,6 @@ public class FlashcardDeckController {
         return flashcardDeckService.createFlashcardDeck(flashcardDeckCreateDto);
     }
 
-
-
-
     @GetMapping("/{deckId}/flashcards")
     List<Flashcard> getFlashcardsByDeckId(@PathVariable Long deckId){
         return this.flashcardDeckService.findFlashcardsByDeckId(deckId);
@@ -73,7 +68,6 @@ public class FlashcardDeckController {
     Flashcard addFlashcardToDeck(@PathVariable Long deckId, @RequestBody AddFlashcardPayload flashcardPayload){
         return this.flashcardDeckService.addFlashcardToDeck(deckId, flashcardPayload);
     }
-
 
     @GetMapping("/{deckId}/subdeck")
     public CurrentSubdeck getCurrentSubdeckByDeckId(@PathVariable Long deckId){

@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="box" *ngIf="isAuthenticated && userFullName">
+    <div class="blob" *ngIf="isAuthenticated && userFullName">
 
         <div class="info">
             <div class="name">{{userFullName}}</div>
@@ -20,7 +20,11 @@
             </div>
         </div>
 
-        <div class="logout-btn" (click)="logout()">LOGOUT</div>
+        <div class="download">
+            <button mat-raised-button color="primary" (click)="downloadCsv()">Download CSV</button>
+        </div>
 
+        <!-- <div class="logout-btn"  (click)="logout()">LOGOUT</div> -->
+        <button mat-raised-button color="warn" (click)="logout()">LOGOUT</button>
     </div>
 </div>
