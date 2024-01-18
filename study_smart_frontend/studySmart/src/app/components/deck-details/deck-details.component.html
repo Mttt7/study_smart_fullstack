@@ -70,9 +70,11 @@
             <tbody>
                 <tr *ngFor="let flashcard of flashcards">
 
-                    <td class="hover text-center" (click)="editFlashcard(flashcard)">{{flashcard.frontContent |
-                        slice:0:30}}</td>
-                    <td class="hover text-center" (click)="editFlashcard(flashcard)">{{flashcard.backContent |
+                    <td class="hover text-center" (click)="editFlashcard(flashcard)">
+                        {{saitizieMarkown(flashcard.frontContent) |slice:0:30}}
+                    </td>
+                    <td class="hover text-center" (click)="editFlashcard(flashcard)">
+                        {{saitizieMarkown(flashcard.backContent) |
                         slice:0:30}}</td>
                     <td class="hover text-center" (click)="editFlashcard(flashcard)">{{getStatusOfFlashcard(flashcard)}}
                     </td>

@@ -41,7 +41,6 @@ export class ProfileComponent {
           this.userFullName = res.name as string;
           this.userEmail = res.email as string;
           this.oktaId = res.sub as string;
-          console.log(this.oktaId);
           this.userService.getUserId(this.oktaId).subscribe(
             (id) => {
               this.id = id;

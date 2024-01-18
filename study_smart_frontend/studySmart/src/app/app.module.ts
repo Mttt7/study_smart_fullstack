@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -70,7 +71,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    OktaAuthModule
+    OktaAuthModule,
+    AngularEditorModule,
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: { oktaAuth } },
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },

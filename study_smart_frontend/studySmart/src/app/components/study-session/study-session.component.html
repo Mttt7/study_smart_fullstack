@@ -4,9 +4,10 @@
         <div class="btn btn-primary" style="margin: .5rem;" routerLink="../">Back</div>
     </div>
     <div class="content">
-        <div class="front-content">{{subdeck[currentFlashcardId]?.frontContent}}</div>
+        <div class="front-content" [innerHTML]="subdeck[currentFlashcardId]?.frontContent">
+        </div>
 
-        <div class="back-content" *ngIf="backShown">{{subdeck[currentFlashcardId]?.backContent}}</div>
+        <div class="back-content" *ngIf="backShown" [innerHtml]="subdeck[currentFlashcardId]?.backContent"></div>
     </div>
     <div class="buttons" *ngIf="!backShown">
         <div class="button-show button" (click)="showBack()">Show</div>

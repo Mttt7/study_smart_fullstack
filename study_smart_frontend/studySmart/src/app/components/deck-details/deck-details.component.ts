@@ -17,6 +17,7 @@ import { FlashcardPayload } from '../../models/FlashcardPayload';
 })
 export class DeckDetailsComponent {
 
+
   pageSize: number = 5;
   deckId: number = -1;
   flashcards: Flashcard[] = [];
@@ -175,5 +176,12 @@ export class DeckDetailsComponent {
         }
       )
     }
+  }
+
+
+  saitizieMarkown(arg0: string): string {
+    const parser = new DOMParser();
+    const parsedHtml = parser.parseFromString(arg0, 'text/html');
+    return parsedHtml.body.textContent || '';
   }
 }

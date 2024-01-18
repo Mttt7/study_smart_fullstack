@@ -29,14 +29,14 @@ export class DialogService {
   }
   openAddFlashcardDialog() {
     const dialogRef: MatDialogRef<AddFlashcardDialogComponent> = this.dialog.open(AddFlashcardDialogComponent, {
-      width: '600px',
+      width: '750px',
     });
     return dialogRef.afterClosed();
   }
 
   openEditFlashcardDialog(frontContent: string, backContent: string) {
     const dialogRef: MatDialogRef<EditFlashcardComponent> = this.dialog.open(EditFlashcardComponent, {
-      width: '600px',
+      width: '750px',
       data: {
         frontContent: frontContent,
         backContent: backContent

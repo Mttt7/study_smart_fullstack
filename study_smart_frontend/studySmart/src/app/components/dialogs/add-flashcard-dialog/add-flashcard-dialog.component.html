@@ -1,12 +1,19 @@
 <div class="container">
-    <div class="text">New Flashcard: </div>
+    <div class="text">Front content: </div>
 
-    <span>front content:</span><textarea #frontContent> </textarea>
-    <span>back content:</span><textarea #backContent> </textarea>
+    <angular-editor id="editor1" #frontContent [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent1"
+        [config]="editorConfig"></angular-editor>
+
+    <div class="text" style="margin-top: 1.8rem;">Back content: </div>
+    <angular-editor id="editor2" #backContent [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent2"
+        [config]="editorConfig"></angular-editor>
+
+    <!-- <span>front content:</span><textarea > </textarea>
+    <span>back content:</span><textarea #backContent> </textarea> -->
 
     <div class="buttons">
         <div class="cancel" (click)="closeDialog({frontContent: '',backContent: ''})">Cancel</div>
-        <div class="yes" (click)="closeDialog({frontContent: frontContent.value,backContent: backContent.value})">
+        <div class="yes" (click)="closeDialog({frontContent: htmlContent1,backContent: htmlContent2})">
             Add
         </div>
     </div>
