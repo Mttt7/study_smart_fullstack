@@ -13,6 +13,7 @@
 
 
 ### You can add/edit your flashcards and style them using Markdown
+(Click gifs for better quality)
 ![gif1](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/abbc4dea-3277-4250-8b41-b68c790c51ac)
 ![gif2](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/abbc4dea-3277-4250-8b41-b68c790c51ac)
 ![gif3](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/a5cd7faf-21bc-4253-8918-d46771e489bf)
