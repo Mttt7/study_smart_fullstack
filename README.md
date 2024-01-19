@@ -14,9 +14,9 @@
 
 ### You can add/edit your flashcards and style them using Markdown
 
-<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/abbc4dea-3277-4250-8b41-b68c790c51ac" width="1216px" height="693px"/>
-<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/3ce6f9ed-7831-4c4d-b989-01cecf6f77ba" width="1216" height="693"/>
-<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/a5cd7faf-21bc-4253-8918-d46771e489bf" width="1216" height="693"/>
+<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/abbc4dea-3277-4250-8b41-b68c790c51ac" width="1920px" height="1080px"/>
+<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/3ce6f9ed-7831-4c4d-b989-01cecf6f77ba" width="1920px" height="1080px"/>
+<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/a5cd7faf-21bc-4253-8918-d46771e489bf" width="1920px" height="1080px"/>
 
 
 ### To start study session just click Start
