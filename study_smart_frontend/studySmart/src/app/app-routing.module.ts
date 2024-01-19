@@ -10,9 +10,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import OktaAuth from '@okta/okta-auth-js';
 
 function sendToLoginPage(oktaAuth: OktaAuth, injector: Injector) {
-  //use injector to access any service available in the app
   const router = injector.get(Router);
-  //redirect the user to the our custom login page
   router.navigate(['/login']);
 }
 

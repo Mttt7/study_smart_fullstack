@@ -14,15 +14,10 @@ import { UserService } from './user.service';
 })
 export class FlashcardDeckService {
 
-
-
-
-
-
   private decksUrl = 'http://localhost:5000/api/decks';
   private usersUrl = 'http://localhost:5000/api/profiles';
 
-  constructor(private httpClient: HttpClient, userService: UserService) { }
+  constructor(private httpClient: HttpClient) { }
 
   getDeckById(id: number): Observable<FlashcardDeck> {
     return this.httpClient.get<FlashcardDeck>(`${this.decksUrl}/${id}`)
@@ -41,8 +36,6 @@ export class FlashcardDeckService {
     "/api/profiles/{id}/decks/paginated/search"
     return this.httpClient.get<FlashcardDecksPaginatedResponse>(`${this.usersUrl}/${userId}/decks/paginated/search?keyword=${keyword}&page=${currentPage}&size=${pageSize}`)
   }
-
-
 
   createDeck(name: String, dayLimit: number, userId: number): Observable<FlashcardDeck> {
     let createDeckPayload = { userProfileId: userId, name: name, dayLimit: dayLimit } as CreateDeckPayload
@@ -91,9 +84,6 @@ export class FlashcardDeckService {
   countReviewedToday(userId: number): Observable<number> {
     return this.httpClient.get<number>(`${this.usersUrl}/${userId}/flashcards/countReviewedToday`)
   }
-
-
-
 }
 
 interface CreateDeckPayload {

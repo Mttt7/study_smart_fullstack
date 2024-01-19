@@ -30,12 +30,6 @@ export class AuthInterceptorService {
       });
 
     }
-
     return await lastValueFrom(next.handle(request));
-    // next.handle(request): W kontekście interceptora, 
-    //next reprezentuje kolejny interceptor w łańcuchu lub
-    // OSTATECZNE WYSŁANIE RZĄDANIA DO  do serwera, jeśli nie ma 
-    //więcej interceptorów. Metoda handle przyjmuje obiekt
-    //  żądania (HttpRequest) i zwraca Observable reprezentujący przepływ odpowiedzi.
   }
 }

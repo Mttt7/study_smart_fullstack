@@ -20,15 +20,13 @@ public class SecurityConfiguration {
                                 .anyRequest().permitAll())
                 .oauth2ResourceServer(oAuth -> oAuth.jwt(Customizer.withDefaults()));
 
-
-
-        //sending 401 when token is invalid (friendly response)-----
+        //sending 401 when token is invalid
         http.setSharedObject(ContentNegotiationStrategy.class, new
                 HeaderContentNegotiationStrategy());
 
         Okta.configureResourceServer401ResponseBody(http);
-        //-----------------------------------------------------------
-        //disable csrf since we are not using cookies for session tracking
+
+        //disable csrf since im not using cookies for session tracking
         http.csrf(AbstractHttpConfigurer::disable);
 
         return http.build();

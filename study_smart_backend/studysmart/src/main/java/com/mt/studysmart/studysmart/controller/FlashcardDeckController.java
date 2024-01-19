@@ -25,13 +25,10 @@ import java.util.List;
 public class FlashcardDeckController {
 
     private final FlashcardDeckService flashcardDeckService;
-
     private final CurrentSubdeckService currentSubdeckService;
-
 
     @GetMapping("/{deckId}")
     FlashcardDeck getFlashcardDeckById(@PathVariable Long deckId){
-
         return this.flashcardDeckService.findById(deckId);
     }
     @GetMapping("/{deckId}/flashcards/paginated")

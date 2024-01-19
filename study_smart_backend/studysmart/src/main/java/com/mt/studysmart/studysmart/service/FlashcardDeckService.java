@@ -27,7 +27,6 @@ public interface FlashcardDeckService {
 
     FlashcardDeck ChangeFlashcardDeckName(Long deckId, NewNameDto name);
 
-
     Page<Flashcard> findFlashcardsByDeckIdWithPagination(Long deckId, Pageable pageable);
 
     FlashcardDeck changeDayLimit(Long deckId, Long dayLimit);

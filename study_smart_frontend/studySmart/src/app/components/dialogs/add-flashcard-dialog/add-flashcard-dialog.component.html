@@ -8,9 +8,6 @@
     <angular-editor id="editor2" #backContent [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent2"
         [config]="editorConfig"></angular-editor>
 
-    <!-- <span>front content:</span><textarea > </textarea>
-    <span>back content:</span><textarea #backContent> </textarea> -->
-
     <div class="buttons">
         <div class="cancel" (click)="closeDialog({frontContent: '',backContent: ''})">Cancel</div>
         <div class="yes" (click)="closeDialog({frontContent: htmlContent1,backContent: htmlContent2})">

@@ -57,8 +57,4 @@ public class UserProfileController {
     public Page<FlashcardDeck> searchDecksByUserIdWithPagination(@PathVariable Long id, Pageable pageable, @RequestParam String keyword){
         return this.userProfileService.searchDecksByUserIdWithPagination(id, pageable,keyword);
     }
-
-
-
-
 }

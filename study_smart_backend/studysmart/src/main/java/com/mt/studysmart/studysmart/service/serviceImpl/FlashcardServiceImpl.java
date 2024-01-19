@@ -92,8 +92,7 @@ public class FlashcardServiceImpl implements FlashcardService {
         FlashcardDeck tempDeck =  this.findById(id).getFlashcardDeck();
         tempDeck.setFlashcardsCount(tempDeck.getFlashcardsCount()-1);
         flashcardDeckService.save(tempDeck);
-
-       flashcardRepository.removeById(id);
+        flashcardRepository.removeById(id);
     }
 
     @Override
@@ -124,9 +123,7 @@ public class FlashcardServiceImpl implements FlashcardService {
             flashcardsReviewedSoFarCount = 0L;
         }
         flashcard.getFlashcardDeck().setReviewedToday(flashcardsReviewedSoFarCount+1);
-
         return this.save(flashcard);
-
     }
 
     public Flashcard findPristineFlashcardFromDeckId(Long deckId){

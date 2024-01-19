@@ -55,17 +55,4 @@ public class Flashcard {
     @Column(name = "status")
     private int status;
 
-    @Override
-    public String toString() {
-        return "Flashcard{" +
-                "id=" + id +
-                ", frontContent='" + frontContent + '\'' +
-                ", backContent='" + backContent + '\'' +
-                ", dateCreated=" + dateCreated +
-                ", lastUpdated=" + lastUpdated +
-                ", flashcardDeck=" + flashcardDeck +
-                ", currentSubdeck=" + currentSubdeck +
-                ", score=" + score +
-                '}';
-    }
 }

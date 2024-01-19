@@ -25,6 +25,4 @@ public interface FlashcardService {
 
     public Flashcard findPristineFlashcardFromDeckId(Long deckId);
 
-
-
 }

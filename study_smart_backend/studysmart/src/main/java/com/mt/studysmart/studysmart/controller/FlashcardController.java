@@ -19,7 +19,6 @@ public class FlashcardController {
     private final FlashcardService flashcardService;
     private final CsvExportService csvExportService;
 
-
     @GetMapping("/{id}")
     Flashcard getFlashcardById(@PathVariable Long id){
         return flashcardService.findById(id);

@@ -19,7 +19,6 @@ export class LoginStatusComponent {
     @Inject(OKTA_AUTH) private oktaAuth: OktaAuth, private userService: UserService) { }
 
   ngOnInit(): void {
-    //Subscribe to authentication state changes
     this.oktaAuthService.authState$.subscribe(
       (result) => {
         this.isAuthenticated = result.isAuthenticated!;

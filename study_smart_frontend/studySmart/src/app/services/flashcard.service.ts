@@ -10,12 +10,9 @@ import { FlashcardDeckService } from './flashcard-deck.service';
 })
 export class FlashcardService {
 
-
-
   private flashcardsUrl = 'http://localhost:5000/api/flashcards';
 
-  constructor(private httpClient: HttpClient,
-    private flashcardDeckService: FlashcardDeckService) { }
+  constructor(private httpClient: HttpClient) { }
 
   getFlashcardById(id: number): Observable<Flashcard> {
     return this.httpClient.get<Flashcard>(`${this.flashcardsUrl}/${id}`)

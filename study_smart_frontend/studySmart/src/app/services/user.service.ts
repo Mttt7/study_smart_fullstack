@@ -25,7 +25,7 @@ export class UserService {
           this.oktaId = res.sub as string;
           return this.httpClient.get<number>(`${this.userUrl}/oktaId/${this.oktaId}`);
         }),
-        last() // Poczekaj na zakończenie wszystkich operacji i zwróć ostatni wynik
+        last()
       );
     } else {
       return this.httpClient.get<number>(`${this.userUrl}/oktaId/${_oktaId}`);
@@ -34,7 +34,6 @@ export class UserService {
   }
 
   logout() {
-    //localStorage.removeItem('oktaId');l
     this.oktaAuth.signOut();
   }
 

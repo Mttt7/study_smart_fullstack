@@ -20,8 +20,6 @@ public class UserProfile {
     @Column(name = "okta_id")
     private String oktaId;
 
-
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy ="userProfile" )
     private List<FlashcardDeck> flashcardDecks;
 

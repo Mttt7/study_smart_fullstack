@@ -117,7 +117,6 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
             }
             flashcardRepository.save(f);
         }
-
     }
 
     @Override
@@ -151,7 +150,6 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         flashcardDeck.setName(flashcardDeckCreateDto.getName());
         flashcardDeck.setDayLimit(flashcardDeckCreateDto.getDayLimit());
         flashcardDeck.setFlashcardsCount(0L);
-
         flashcardDeckRepository.save(flashcardDeck);
 
         return flashcardDeck;
@@ -160,7 +158,6 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
     @Override
     public void deleteFlashcardDeck(Long deckId) {
         FlashcardDeck flashcardDeck = this.findById(deckId);
-
         if(flashcardDeck!=null){
             List<Flashcard> flashcards = this.findFlashcardsByDeckId(deckId);
             flashcardRepository.deleteAll(flashcards);
@@ -204,6 +201,4 @@ public class FlashcardDeckServiceImpl implements FlashcardDeckService {
         }
         return null;
     }
-
-
 }

@@ -9,11 +9,4 @@ public class AddFlashcardPayload {
     private String frontContent;
     private String backContent;
 
-    @Override
-    public String toString() {
-        return "AddFlashcardPayload{" +
-                "frontContent='" + frontContent + '\'' +
-                ", backContent='" + backContent + '\'' +
-                '}';
-    }
 }
