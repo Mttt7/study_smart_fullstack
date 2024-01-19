@@ -13,10 +13,10 @@
 
 
 ### You can add/edit your flashcards and style them using Markdown
-<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/abbc4dea-3277-4250-8b41-b68c790c51ac" width="1920" height="1080"/>
-![addFLACROPPED](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/abbc4dea-3277-4250-8b41-b68c790c51ac)
-![addFLashcardCropped](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/3ce6f9ed-7831-4c4d-b989-01cecf6f77ba)
-![namechangeandddeletedeletFlashcard](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/a5cd7faf-21bc-4253-8918-d46771e489bf)
+<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/abbc4dea-3277-4250-8b41-b68c790c51ac" width="1216" height="693"/>
+<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/3ce6f9ed-7831-4c4d-b989-01cecf6f77ba" width="1216" height="693"/>
+<img src="https://github.com/Mttt7/study_smart_fullstack/assets/102900827/a5cd7faf-21bc-4253-8918-d46771e489bf" width="1216" height="693"/>
+
 
 ### To start study session just click Start
 ### Read the front content, then hit the space to reveal the back content and choose how well you knew the answer.
