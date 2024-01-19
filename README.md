@@ -2,6 +2,11 @@
  ### Since I remember, I've been using apps like Anki to memorize knowledge needed for my exams and tests. Therefore, I decided to create StudySmart, an app designed to facilitate smart studying through the use of flashcards.
 ### This project is built upon technologies such as MySql, Spring Boot, Angular, and Okta for seamless login functionality.
 
+![image](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/f15da56b-e6e1-411b-833b-ccf05ad5c2ff)
+
+
+
+
 ### The login feature is provided by Okta.
 ![image](https://github.com/Mttt7/study_smart_fullstack/assets/102900827/89c6655c-2155-4913-80c9-93172c4780b4)
 
